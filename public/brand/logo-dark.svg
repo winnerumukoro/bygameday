@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 40" width="240" height="40" fill="none">
+  <!-- GAMEDAY Athletic Condensed Wordmark (Dark variant for light backgrounds) -->
+  <text x="0" y="32" font-family="system-ui, -apple-system, sans-serif" font-weight="900" font-size="34" letter-spacing="-0.04em" fill="#000000" font-stretch="condensed" text-anchor="start">
+    GAMEDAY
+  </text>
+  <rect x="220" y="8" width="6" height="24" fill="#C89A2B" />
+</svg>

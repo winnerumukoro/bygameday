@@ -1,0 +1,61 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: #F5F4EB;
+    --foreground: #000000;
+  }
+
+  * {
+    border-color: rgba(0, 0, 0, 0.1);
+  }
+
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-inter), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background-color: #C89A2B;
+    color: #000000;
+  }
+
+  /* Headings defaults */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-anton), Impact, sans-serif;
+    letter-spacing: -0.02em;
+    line-height: 0.92;
+    text-transform: uppercase;
+  }
+}
+
+@layer utilities {
+  /* Subtle image hover zoom */
+  .image-hover-zoom {
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .image-hover-zoom:hover {
+    transform: scale(1.03);
+  }
+
+  /* Accessible Gold Focus Ring */
+  .focus-ring-gold {
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
