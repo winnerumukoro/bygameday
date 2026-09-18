@@ -6,48 +6,9 @@ import { SectionHeader } from "@/components/brand/section-header";
 import { EventCard } from "@/components/brand/event-card";
 import { NewsletterForm } from "@/components/brand/newsletter-form";
 
-const UPCOMING_EVENTS = [
-  {
-    slug: "interhouse-basketball-2026",
-    title: "Interhouse 5v5 Basketball Championship",
-    type: "Interhouse",
-    dateDisplay: "Sat, Apr 11, 2026",
-    locationDisplay: "Rucker Fieldhouse, NY",
-    imageSrc:
-      "https://images.unsplash.com/photo-1574629810360-7efbbe195018?q=80&w=800&auto=format&fit=crop",
-    acceptsVendors: true,
-  },
-  {
-    slug: "midnight-1v1-streetball-clash",
-    title: "Midnight 1v1 Streetball Showcase",
-    type: "1v1 Clash",
-    dateDisplay: "Fri, Apr 24, 2026",
-    locationDisplay: "West 4th Courts, NY",
-    imageSrc:
-      "https://images.unsplash.com/photo-1546519638-68e109498ffc?q=80&w=800&auto=format&fit=crop",
-    acceptsVendors: false,
-  },
-  {
-    slug: "spring-tailgate-viewing-party",
-    title: "Spring Championship Viewing Party & Market",
-    type: "Viewing Party",
-    dateDisplay: "Sun, May 3, 2026",
-    locationDisplay: "Pier 57 Rooftop, NY",
-    imageSrc:
-      "https://images.unsplash.com/photo-1511192336575-5a79af67a629?q=80&w=800&auto=format&fit=crop",
-    acceptsVendors: true,
-  },
-  {
-    slug: "metro-volleyball-classic",
-    title: "Metro Intramural Sand Volleyball Classic",
-    type: "Intramural",
-    dateDisplay: "Sat, May 16, 2026",
-    locationDisplay: "Hudson River Park, NY",
-    imageSrc:
-      "https://images.unsplash.com/photo-1612872087720-bb876e2e67d1?q=80&w=800&auto=format&fit=crop",
-    acceptsVendors: true,
-  },
-];
+import { format, parseISO } from "date-fns";
+import { getUpcomingEvents } from "@/lib/events/data";
+
 
 const GALLERY_PREVIEW = [
   {
@@ -77,6 +38,8 @@ const GALLERY_PREVIEW = [
 ];
 
 export default function HomePage() {
+  const upcomingEvents = getUpcomingEvents(4);
+
   return (
     <div className="flex flex-col w-full bg-ivory text-ink">
       {/* 1. Live Construction & Client Progress Announcement Banner */}
@@ -151,9 +114,21 @@ export default function HomePage() {
 
         {/* Product Tile Style Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {UPCOMING_EVENTS.map((event) => (
-            <EventCard key={event.slug} {...event} />
-          ))}
+          {upcomingEvents.map((event) => {
+            const formattedDate = format(parseISO(event.startsAt), "EEE, MMM d, yyyy");
+            return (
+              <EventCard
+                key={event.slug}
+                slug={event.slug}
+                title={event.title}
+                type={event.type}
+                dateDisplay={formattedDate}
+                locationDisplay={event.venueName}
+                imageSrc={event.coverImagePath}
+                acceptsVendors={event.acceptsVendors}
+              />
+            );
+          })}
         </div>
       </section>
 
