@@ -41,10 +41,10 @@ export function NewsletterForm({
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         placeholder={placeholder}
-        className="bg-ivory/10 border border-ivory/20 px-5 py-4 text-base text-ivory placeholder:text-ivory/40 focus:outline-none focus:ring-2 focus:ring-gold min-h-[48px] rounded-none flex-grow"
+        className="w-full min-w-0 flex-grow bg-ivory/10 border border-ivory/20 px-5 py-4 text-base text-ivory placeholder:text-ivory/40 focus:outline-none focus:ring-2 focus:ring-gold min-h-[48px] rounded-none"
         aria-label="Email for updates"
       />
-      <Button type="submit" variant="primary" size={size} className="whitespace-nowrap">
+      <Button type="submit" variant="primary" size={size} className="shrink-0 whitespace-nowrap">
         {buttonText}
       </Button>
     </form>

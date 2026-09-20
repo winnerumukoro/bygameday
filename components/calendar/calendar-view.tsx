@@ -30,6 +30,17 @@ interface CalendarViewProps {
 
 export function CalendarView({ events }: CalendarViewProps) {
   const router = useRouter();
+  const [isCompact, setIsCompact] = React.useState(false);
+
+  // Below sm the month grid cells are too narrow to read — fall back to the
+  // agenda list and drop the view buttons that will not fit the toolbar.
+  React.useEffect(() => {
+    const query = window.matchMedia("(max-width: 639px)");
+    const apply = () => setIsCompact(query.matches);
+    apply();
+    query.addEventListener("change", apply);
+    return () => query.removeEventListener("change", apply);
+  }, []);
 
   const calendarEvents = React.useMemo(() => {
     return events.map((event) => ({
@@ -74,6 +85,38 @@ export function CalendarView({ events }: CalendarViewProps) {
         @media (min-width: 640px) {
           .gameday-fullcalendar .fc-toolbar-title {
             font-size: 2rem !important;
+          }
+        }
+
+        .gameday-fullcalendar .fc-toolbar.fc-header-toolbar {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 0.5rem;
+          margin-bottom: 1rem !important;
+        }
+
+        @media (max-width: 639px) {
+          .gameday-fullcalendar .fc-toolbar.fc-header-toolbar {
+            justify-content: space-between;
+          }
+
+          .gameday-fullcalendar .fc-toolbar-chunk {
+            flex: 0 0 auto;
+          }
+
+          /* Title takes its own row so the controls never crush it */
+          .gameday-fullcalendar .fc-toolbar-chunk:nth-child(2) {
+            order: -1;
+            flex: 1 0 100%;
+          }
+
+          .gameday-fullcalendar .fc-button {
+            font-size: 0.65rem !important;
+            padding: 0.45rem 0.6rem !important;
+          }
+
+          .gameday-fullcalendar .fc-list-event-title {
+            font-size: 0.85rem;
           }
         }
 
@@ -149,12 +192,13 @@ export function CalendarView({ events }: CalendarViewProps) {
         // Unavoidable external type conflict: @fullcalendar/core types PluginDef.premiumReleaseDate as Date while @fullcalendar/react types PluginInput as string
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         plugins={[dayGridPlugin, timeGridPlugin, listPlugin, interactionPlugin] as any}
-        initialView="dayGridMonth"
-        headerToolbar={{
-          left: "prev,next today",
-          center: "title",
-          right: "dayGridMonth,timeGridWeek,listMonth",
-        }}
+        key={isCompact ? "compact" : "wide"}
+        initialView={isCompact ? "listMonth" : "dayGridMonth"}
+        headerToolbar={
+          isCompact
+            ? { left: "prev,next", center: "title", right: "dayGridMonth,listMonth" }
+            : { left: "prev,next today", center: "title", right: "dayGridMonth,timeGridWeek,listMonth" }
+        }
 
         events={calendarEvents}
         eventClick={(info) => {

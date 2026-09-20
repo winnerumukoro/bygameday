@@ -48,4 +48,15 @@ This document records architectural, design, and business logic decisions made a
 - **Single-Elimination Bracket Engine:** Automatic bye calculation for non-powers-of-two using `nextPowerOfTwo()`. Top seeds receive round 1 byes. Standard round naming (Round of 16, Quarterfinals, Semifinals, Championship). Match states: Scheduled, In Progress (Live), Completed, Bye.
 - **Free Agent Pool:** Solo athletes register into a public directory browsable by team captains. Free agents sign the athletic waiver at registration time so they are immediately game-ready when drafted.
 
+---
+
+## 5. Phase 5: Internal Admin Dashboard & Operations Decisions
+- **Courtside Operational Shell:** Clean, high-contrast operations interface isolated from the consumer site layout. Employs large touch targets and instant state updates for tablet/laptop scorers courtside.
+- **Role-Based Protection:** Route guard middleware protects all `/admin/*` routes (with the exception of `/admin/login`). Supports both Supabase Auth session tokens and zero-latency demo role switching (`gameday_staff_role` cookie) for stakeholder walkthroughs.
+- **Vendor Curation & 48h Countdown:** Staff review brand menus against category exclusivity rules. One-click approvals automatically calculate and stamp a 48-hour expiration deadline (`paymentDeadline`), preparing the slot for payment token generation.
+- **Courtside Live Match Scoring:** Modal scoring interface enables scorekeepers to record points (+1, +2, +3, -1) and mark matches completed, automatically assigning winners and advancing competitors through the bracket.
+- **Legal Waiver Compliance & CSV Export:** Immutable audit log captures legal signatures with IP addresses and user-agent strings, supporting instantaneous on-demand client-side CSV downloads for venue authorities.
+- **Financial Reconciliation & Stripe Refund Audit:** Displays revenue distribution across spectator tickets, team registrations, vendor concessions, and sponsorships, with manual refund modals that record reason codes for audit accountability.
+
+
 

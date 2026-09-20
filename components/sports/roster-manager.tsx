@@ -181,7 +181,7 @@ export function RosterManager({ team, division }: RosterManagerProps) {
         </div>
 
         <div className="overflow-x-auto">
-          <table className="w-full text-left text-xs font-body">
+          <table className="w-full min-w-[720px] text-left text-xs font-body">
             <thead className="bg-ink/[0.03] border-b border-ink/10 text-ink/60 uppercase font-headline tracking-wider text-[11px]">
               <tr>
                 <th className="py-3 px-4">#</th>

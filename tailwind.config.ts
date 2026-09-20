@@ -58,6 +58,50 @@ const config: Config = {
       },
       scale: {
         103: "1.03",
+        104: "1.04",
+      },
+      screens: {
+        xs: "420px",
+      },
+      transitionTimingFunction: {
+        "out-expo": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "out-quart": "cubic-bezier(0.25, 1, 0.5, 1)",
+        "in-out-quint": "cubic-bezier(0.83, 0, 0.17, 1)",
+      },
+      transitionDuration: {
+        450: "450ms",
+        600: "600ms",
+        900: "900ms",
+      },
+      keyframes: {
+        "ken-burns": {
+          "0%": { transform: "scale(1.06) translate3d(0, 0, 0)" },
+          "100%": { transform: "scale(1.18) translate3d(0, -1.5%, 0)" },
+        },
+        "pulse-ring": {
+          "0%": { transform: "scale(0.85)", opacity: "0.9" },
+          "70%, 100%": { transform: "scale(2.2)", opacity: "0" },
+        },
+        "scroll-cue": {
+          "0%": { transform: "translateY(-100%)", opacity: "0" },
+          "40%": { opacity: "1" },
+          "100%": { transform: "translateY(100%)", opacity: "0" },
+        },
+        "fade-up-in": {
+          from: { opacity: "0", transform: "translate3d(0, 24px, 0)" },
+          to: { opacity: "1", transform: "translate3d(0, 0, 0)" },
+        },
+        "rule-grow": {
+          from: { transform: "scaleX(0)" },
+          to: { transform: "scaleX(1)" },
+        },
+      },
+      animation: {
+        "ken-burns": "ken-burns 22s ease-out forwards",
+        "pulse-ring": "pulse-ring 2.4s cubic-bezier(0.16, 1, 0.3, 1) infinite",
+        "scroll-cue": "scroll-cue 2s cubic-bezier(0.83, 0, 0.17, 1) infinite",
+        "fade-up-in": "fade-up-in 600ms cubic-bezier(0.16, 1, 0.3, 1) both",
+        "rule-grow": "rule-grow 900ms cubic-bezier(0.16, 1, 0.3, 1) both",
       },
     },
   },
