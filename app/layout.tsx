@@ -5,18 +5,18 @@ import "./globals.css";
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://bygameday.com"),
   title: {
-    default: "GAMEDAY | The Community Sports & Tournament Platform",
+    default: "GAMEDAY | Austin Sports Tournaments",
     template: "%s | GAMEDAY",
   },
   description:
-    "High-energy community sports tournaments, 1v1 showdowns, curated local vendor markets, and championship events. Built for athletes, creators, and fans.",
+    "Weekend sports brackets around Austin — basketball, volleyball, soccer, flag football and pickleball — with local food vendors on site.",
   keywords: [
     "GAMEDAY",
-    "sports tournaments",
-    "intramural sports",
-    "1v1 basketball",
-    "community events",
-    "local vendors",
+    "Austin sports tournaments",
+    "Austin intramural sports",
+    "1v1 basketball Austin",
+    "Austin pickup soccer",
+    "Austin local food trucks",
     "tournament brackets",
     "Austin sports",
   ],
@@ -31,15 +31,15 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: "https://bygameday.com",
     siteName: "GAMEDAY",
-    title: "GAMEDAY | The Community Sports & Tournament Platform",
+    title: "GAMEDAY | Austin Sports Tournaments",
     description:
-      "High-energy community sports tournaments, 1v1 showdowns, curated local vendor markets, and championship events.",
+      "Weekend sports brackets around Austin — basketball, volleyball, soccer, flag football and pickleball — with local food vendors on site.",
   },
   twitter: {
     card: "summary_large_image",
-    title: "GAMEDAY | The Community Sports & Tournament Platform",
+    title: "GAMEDAY | Austin Sports Tournaments",
     description:
-      "High-energy community sports tournaments, 1v1 showdowns, curated local vendor markets, and championship events.",
+      "Weekend sports brackets around Austin — basketball, volleyball, soccer, flag football and pickleball — with local food vendors on site.",
     creator: "@bygameday",
   },
   icons: {

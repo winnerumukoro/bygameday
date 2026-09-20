@@ -27,7 +27,7 @@ export function Hero({
   ctaHref = "/events",
   secondaryCtaText = "ENTER A BRACKET",
   secondaryCtaHref = "/sports",
-  imageSrc = "/tmp-verify/hero-b.jpg",
+  imageSrc = "https://images.unsplash.com/photo-1508098682722-e99c43a406b2?q=80&w=2400&auto=format&fit=crop",
 }: HeroProps) {
   const displayLines = title
     ? title.includes(". ")

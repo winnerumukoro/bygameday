@@ -11,7 +11,6 @@ import {
   formatCurrency,
 } from "@/lib/vendors/data";
 import {
-  Store,
   ShieldCheck,
   Zap,
   Users,
@@ -39,19 +38,12 @@ export default function VendorsPage() {
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff08_1px,transparent_1px),linear-gradient(to_bottom,#ffffff08_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] pointer-events-none" />
 
         <div className="relative max-w-stadium mx-auto">
-          <div className="inline-flex items-center gap-2 bg-gold/10 border border-gold/30 px-3.5 py-1.5 mb-6 text-gold">
-            <Store className="w-4 h-4" />
-            <span className="text-xs font-headline uppercase tracking-widest">
-              Curated Vendor Marketplace
-            </span>
-          </div>
-
           <h1 className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-headline uppercase tracking-tight leading-tighter text-ivory max-w-5xl">
             SELL AT <span className="text-gold">GAMEDAY</span>
           </h1>
 
           <p className="mt-6 text-base sm:text-xl text-ivory/80 font-body max-w-2xl leading-relaxed">
-            Position your brand in front of thousands of high-energy athletes, spectators, and local creators. We enforce strict subcategory exclusivity — meaning you own your specialty without competition.
+            Bring your food truck, coffee cart, or local brand to weekend tournaments in Austin. We take one vendor per food category per event, so you&apos;re never parked next to someone selling the same thing.
           </p>
 
           <div className="mt-8 sm:mt-10 flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
@@ -66,27 +58,27 @@ export default function VendorsPage() {
           {/* Quick Metrics Strip */}
           <div className="mt-16 sm:mt-20 pt-8 border-t border-ivory/15 grid grid-cols-2 sm:grid-cols-4 gap-6 sm:gap-8">
             <div>
-              <span className="block text-3xl sm:text-4xl font-headline text-gold">100%</span>
+              <span className="block text-3xl sm:text-4xl font-headline text-gold">1 per type</span>
               <span className="text-xs font-headline uppercase tracking-wider text-ivory/60 mt-1 block">
-                Category Exclusivity
+                No Duplicate Menus
               </span>
             </div>
             <div>
-              <span className="block text-3xl sm:text-4xl font-headline text-gold">12K+</span>
+              <span className="block text-3xl sm:text-4xl font-headline text-gold">$0</span>
               <span className="text-xs font-headline uppercase tracking-wider text-ivory/60 mt-1 block">
-                Annual Attendees
+                Free To Apply
               </span>
             </div>
             <div>
               <span className="block text-3xl sm:text-4xl font-headline text-gold">48h</span>
               <span className="text-xs font-headline uppercase tracking-wider text-ivory/60 mt-1 block">
-                Reserved Hold Window
+                Hold Window If Selected
               </span>
             </div>
             <div>
               <span className="block text-3xl sm:text-4xl font-headline text-gold">10x10</span>
               <span className="text-xs font-headline uppercase tracking-wider text-ivory/60 mt-1 block">
-                Turnkey Activation Space
+                Pitch Space
               </span>
             </div>
           </div>

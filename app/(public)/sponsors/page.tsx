@@ -72,17 +72,17 @@ export default function SponsorsPage() {
       <section className="pt-32 sm:pt-40 pb-20 max-w-stadium mx-auto px-4 sm:px-6 lg:px-12 border-b border-ink/15">
         <div className="max-w-4xl">
           <span className="text-xs font-headline uppercase tracking-widest text-gold block mb-3">
-            Brand Activations & Partnerships
+            Austin Local Partnerships
           </span>
           <h1 className="text-5xl sm:text-7xl lg:text-9xl font-headline uppercase text-ink tracking-tight leading-tighter">
-            POWER THE GAME
+            SPONSOR A TOURNAMENT
           </h1>
           <p className="text-base sm:text-xl text-ink/80 font-body max-w-2xl mt-6 leading-relaxed">
-            Partner with the fastest-growing community sports and event circuit. Put your brand directly in front of highly engaged athletes, creators, and tournament attendees.
+            For Austin businesses and local brands that want their name on a weekend bracket. We put your product and signage in front of players, spectators, and local crowds across Austin parks.
           </p>
           <div className="pt-8 flex flex-col sm:flex-row gap-4">
             <Button asChild variant="primary" size="lg">
-              <a href="#inquire">Inquire for 2026 Season</a>
+              <a href="#inquire">Talk to us about sponsoring</a>
             </Button>
             <Button asChild variant="secondary" size="lg">
               <a href="#tiers">View Partnership Tiers</a>
@@ -91,63 +91,63 @@ export default function SponsorsPage() {
         </div>
       </section>
 
-      {/* Audience Stats Grid */}
+      {/* Deliverables Grid */}
       <section className="py-20 bg-ink text-ivory border-b border-ivory/15">
         <div className="max-w-stadium mx-auto px-4 sm:px-6 lg:px-12">
           <div className="mb-12">
             <span className="text-xs font-headline tracking-widest uppercase text-gold">
-              Reach & Demographics
+              What You Get
             </span>
             <h2 className="text-3xl sm:text-5xl font-headline uppercase text-ivory mt-2">
-              AUDIENCE METRICS THAT DELIVER
+              REAL COURTSIDE PRESENCE
             </h2>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            <div className="p-6 bg-ivory/5 border border-ivory/10 flex flex-col justify-between min-h-[200px]">
+            <div className="p-6 bg-ivory/5 border border-ivory/10 flex flex-col justify-between min-h-[180px]">
               <Users className="w-8 h-8 text-gold mb-4" />
               <div>
-                <span className="text-4xl sm:text-5xl font-headline text-ivory block">
-                  12,000+
+                <span className="text-2xl sm:text-3xl font-headline text-ivory block uppercase">
+                  On-Site Pitch
                 </span>
-                <span className="text-xs font-headline uppercase tracking-wider text-ivory/60 mt-1 block">
-                  Annual In-Person Attendees
+                <span className="text-xs font-body text-ivory/60 mt-2 block leading-relaxed">
+                  Dedicated tent or booth space at Austin tournament venues on game days.
                 </span>
               </div>
             </div>
 
-            <div className="p-6 bg-ivory/5 border border-ivory/10 flex flex-col justify-between min-h-[200px]">
+            <div className="p-6 bg-ivory/5 border border-ivory/10 flex flex-col justify-between min-h-[180px]">
               <Target className="w-8 h-8 text-gold mb-4" />
               <div>
-                <span className="text-4xl sm:text-5xl font-headline text-ivory block">
-                  18–34
+                <span className="text-2xl sm:text-3xl font-headline text-ivory block uppercase">
+                  Bracket Signage
                 </span>
-                <span className="text-xs font-headline uppercase tracking-wider text-ivory/60 mt-1 block">
-                  Primary Demographic Core (84%)
+                <span className="text-xs font-body text-ivory/60 mt-2 block leading-relaxed">
+                  Brand placement on physical tournament bracket boards and court barriers.
                 </span>
               </div>
             </div>
 
-            <div className="p-6 bg-ivory/5 border border-ivory/10 flex flex-col justify-between min-h-[200px]">
+            <div className="p-6 bg-ivory/5 border border-ivory/10 flex flex-col justify-between min-h-[180px]">
               <Eye className="w-8 h-8 text-gold mb-4" />
               <div>
-                <span className="text-4xl sm:text-5xl font-headline text-ivory block">
-                  450K+
+                <span className="text-2xl sm:text-3xl font-headline text-ivory block uppercase">
+                  Product Sampling
                 </span>
-                <span className="text-xs font-headline uppercase tracking-wider text-ivory/60 mt-1 block">
-                  Digital Impressions / Season
+                <span className="text-xs font-body text-ivory/60 mt-2 block leading-relaxed">
+                  Direct rights to hand out beverages, snacks, or apparel to competing athletes.
                 </span>
               </div>
             </div>
 
-            <div className="p-6 bg-ivory/5 border border-ivory/10 flex flex-col justify-between min-h-[200px]">
+            <div className="p-6 bg-ivory/5 border border-ivory/10 flex flex-col justify-between min-h-[180px]">
               <ShieldCheck className="w-8 h-8 text-gold mb-4" />
               <div>
-                <span className="text-4xl sm:text-5xl font-headline text-ivory block">
-                  92%
+                <span className="text-2xl sm:text-3xl font-headline text-ivory block uppercase">
+                  PA Shoutouts
                 </span>
-                <span className="text-xs font-headline uppercase tracking-wider text-ivory/60 mt-1 block">
-                  Brand Recall Across Attendees
+                <span className="text-xs font-body text-ivory/60 mt-2 block leading-relaxed">
+                  Live announcements from the courtside MC during division semifinals and finals.
                 </span>
               </div>
             </div>

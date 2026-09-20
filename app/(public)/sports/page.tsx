@@ -5,7 +5,6 @@ import { SectionHeader } from "@/components/brand/section-header";
 import { SportsHubBrowser } from "@/components/sports/sports-hub-browser";
 import { getSports, getDivisions } from "@/lib/sports/data";
 import {
-  Trophy,
   Users,
   User,
   ArrowRight,
@@ -29,19 +28,12 @@ export default function SportsPage() {
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff08_1px,transparent_1px),linear-gradient(to_bottom,#ffffff08_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] pointer-events-none" />
 
         <div className="relative max-w-stadium mx-auto">
-          <div className="inline-flex items-center gap-2 bg-gold/10 border border-gold/30 px-3.5 py-1.5 mb-6 text-gold">
-            <Trophy className="w-4 h-4" />
-            <span className="text-xs font-headline uppercase tracking-widest">
-              Athletic Competition Engine
-            </span>
-          </div>
-
           <h1 className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-headline uppercase tracking-tight leading-tighter text-ivory max-w-5xl">
-            COMPETE AT <span className="text-gold">GAMEDAY</span>
+            AUSTIN <span className="text-gold">TOURNAMENTS</span>
           </h1>
 
           <p className="mt-6 text-base sm:text-xl text-ivory/80 font-body max-w-2xl leading-relaxed">
-            Step onto the hardwood, sand, turf, and asphalt. 16-team intramural brackets, king-of-the-court 1v1 showdowns, electronic scoreboards, and certified referee crews.
+            Weekend brackets across Austin on hardwood, sand, turf, and asphalt. Enter with your squad, take on 1v1 duels, or register solo and we&apos;ll place you on a roster.
           </p>
 
           <div className="mt-8 sm:mt-10 flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
@@ -64,25 +56,25 @@ export default function SportsPage() {
             <div>
               <span className="block text-3xl sm:text-4xl font-headline text-gold">5</span>
               <span className="text-xs font-headline uppercase tracking-wider text-ivory/60 mt-1 block">
-                Competitive Sports
+                Sports
               </span>
             </div>
             <div>
-              <span className="block text-3xl sm:text-4xl font-headline text-gold">1,800+</span>
+              <span className="block text-3xl sm:text-4xl font-headline text-gold">2</span>
               <span className="text-xs font-headline uppercase tracking-wider text-ivory/60 mt-1 block">
-                Rostered Athletes
+                Formats (Teams & 1v1)
               </span>
             </div>
             <div>
-              <span className="block text-3xl sm:text-4xl font-headline text-gold">100%</span>
+              <span className="block text-3xl sm:text-4xl font-headline text-gold">Official</span>
               <span className="text-xs font-headline uppercase tracking-wider text-ivory/60 mt-1 block">
-                Electronic Scoring
+                Refereed Games
               </span>
             </div>
             <div>
               <span className="block text-3xl sm:text-4xl font-headline text-gold">Live</span>
               <span className="text-xs font-headline uppercase tracking-wider text-ivory/60 mt-1 block">
-                Interactive Brackets
+                Updated Brackets
               </span>
             </div>
           </div>
