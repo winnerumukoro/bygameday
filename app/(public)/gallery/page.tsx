@@ -35,7 +35,7 @@ const GALLERY_ITEMS: GalleryItem[] = [
   {
     id: "g4",
     type: "image",
-    src: "https://images.unsplash.com/photo-1508098682722-e99c43a406b2?q=80&w=1400&auto=format&fit=crop",
+    src: "https://images.unsplash.com/photo-1517927033932-b3d18e61fb3a?q=80&w=1400&auto=format&fit=crop",
     caption: "Futsal derby penalty shootout decider under the arena floodlights.",
     category: "Soccer",
     eventTitle: "Queens Cup 5v5 Futsal",
@@ -67,7 +67,7 @@ const GALLERY_ITEMS: GalleryItem[] = [
   {
     id: "g8",
     type: "image",
-    src: "https://images.unsplash.com/photo-1517649763962-0c623266ddc0?q=80&w=1400&auto=format&fit=crop",
+    src: "https://images.unsplash.com/photo-1459865264687-595d652de67e?q=80&w=1400&auto=format&fit=crop",
     caption: "Fans reacting to a buzzer beater during the NBA Finals mega watch party.",
     category: "Fan Energy",
     eventTitle: "Finals Mega Bash",
@@ -99,7 +99,7 @@ const GALLERY_ITEMS: GalleryItem[] = [
   {
     id: "g12",
     type: "image",
-    src: "https://images.unsplash.com/photo-1526676037777-05a232554f77?q=80&w=1400&auto=format&fit=crop",
+    src: "https://images.unsplash.com/photo-1560272564-c83b66b1ad12?q=80&w=1400&auto=format&fit=crop",
     caption: "Neon glow dodgeball champions hoisting the division trophy.",
     category: "Fan Energy",
     eventTitle: "Glow-in-the-Dark Dodgeball",

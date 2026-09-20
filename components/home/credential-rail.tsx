@@ -1,14 +1,14 @@
 import { Marquee } from "@/components/motion/marquee";
 
 const WORDS = [
-  "INTERHOUSE",
-  "1V1 SHOWDOWN",
-  "LIVE BRACKETS",
-  "VENDOR MARKET",
-  "VIEWING PARTIES",
-  "FREE AGENTS",
-  "CHAMPIONSHIPS",
-  "COMMUNITY",
+  "BASKETBALL",
+  "VOLLEYBALL",
+  "SOCCER",
+  "FLAG FOOTBALL",
+  "PICKLEBALL",
+  "1V1",
+  "FOOD VENDORS",
+  "AUSTIN, TX",
 ];
 
 /**

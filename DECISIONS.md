@@ -58,5 +58,14 @@ This document records architectural, design, and business logic decisions made a
 - **Legal Waiver Compliance & CSV Export:** Immutable audit log captures legal signatures with IP addresses and user-agent strings, supporting instantaneous on-demand client-side CSV downloads for venue authorities.
 - **Financial Reconciliation & Stripe Refund Audit:** Displays revenue distribution across spectator tickets, team registrations, vendor concessions, and sponsorships, with manual refund modals that record reason codes for audit accountability.
 
+---
+
+## 6. Phase 6: Polish, Performance & Production Launch Decisions
+- **Athletic Scoreboard 404 & Error Boundaries:** Replaces default browser and framework error screens with high-impact branded experiences: *"404: OUT OF BOUNDS"* and *"TECHNICAL FOUL ON THE PLAY"*, featuring contextual recovery buttons to return users directly to active calendar or bracket views.
+- **Dynamic OpenGraph Social Generation:** Built using Next.js `ImageResponse` (`@vercel/og`) at `app/opengraph-image.tsx` (1200x630) to generate live, branded social sharing cards with Gold accents and dynamic season tags for WhatsApp, iMessage, Twitter/X, and LinkedIn previews.
+- **SEO & Metadata Hierarchy:** Root layout defines `metadataBase`, Twitter large image summary cards, canonical link declarations, and explicit crawler rules (allowing public routes while strictly disallowing `/admin/` and `/api/`).
+- **Production Performance Budget:** Enforces font preloading via `next/font/google` CSS variables (`fontAnton`, `fontInter`), zero runtime JavaScript bloat, dynamic chunk loading for heavier vendor/sports components, and automated static generation for all static & semi-dynamic tournament routes.
+
+
 
 

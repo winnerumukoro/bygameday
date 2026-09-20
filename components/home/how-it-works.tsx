@@ -6,36 +6,33 @@ import { Reveal } from "@/components/motion/reveal";
 const STEPS = [
   {
     id: "01",
-    title: "PICK YOUR FIXTURE",
-    body: "Filter the calendar by sport, format, and date. Every listing shows the venue, the division, and whether vendor slots are still open.",
+    title: "FIND A DATE",
+    body: "Pick the sport and the weekend that works. Each listing tells you the venue, the division and what it costs.",
     href: "/events",
-    linkText: "Browse the calendar",
+    linkText: "See what's coming up",
   },
   {
     id: "02",
-    title: "REGISTER & SIGN",
-    body: "Enter as a solo athlete, a captain with a squad, or a free agent. Fees and the athletic waiver are handled in one pass at checkout.",
+    title: "SIGN UP AND PAY",
+    body: "Captains register the team; solo players register themselves. Fee and waiver are done in one go.",
     href: "/sports",
     linkText: "Start a registration",
   },
   {
     id: "03",
-    title: "PLAY THE BRACKET",
-    body: "Seeds and byes are generated automatically. Follow your run live from the round of 16 through to the championship.",
+    title: "TURN UP AND PLAY",
+    body: "We post the bracket before the first whistle and keep the scores updated through the final.",
     href: "/sports",
-    linkText: "View live brackets",
+    linkText: "Look at a bracket",
   },
 ];
 
-/** Three-step onboarding path with a gold connector that draws across on scroll. */
+/** Three-step path with a gold connector that draws across on scroll. */
 export function HowItWorks() {
   return (
     <section className="relative w-full py-16 sm:py-20 md:py-28 max-w-stadium mx-auto px-4 sm:px-6 lg:px-12">
-      <SectionHeader
-        title="FROM SIGN-UP TO SCOREBOARD"
-        subtitle="How Gameday Works"
-        description="Three steps between you and the opening whistle."
-      />
+      {/* Second and last eyebrow on the page */}
+      <SectionHeader title="HOW IT WORKS" subtitle="Sign-up to first whistle" />
 
       <div className="relative">
         {/* Connector rule behind the cards, desktop only */}
@@ -56,7 +53,7 @@ export function HowItWorks() {
                 <span className="h-px flex-grow bg-ink/10 md:hidden" />
               </div>
 
-              <h3 className="mt-5 text-xl sm:text-2xl md:text-[1.7rem] font-headline uppercase leading-[0.95] tracking-tight text-ink">
+              <h3 className="mt-5 text-xl sm:text-2xl md:text-[1.7rem] font-headline uppercase leading-[1.02] tracking-tight text-ink">
                 {step.title}
               </h3>
 

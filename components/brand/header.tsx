@@ -79,8 +79,6 @@ export function Header() {
   const isHome = pathname === "/";
   // Transparent over the home hero; solid ivory once scrolled or on any other page.
   const isLightMode = isScrolled || !isHome;
-  // Home renders a 36px status ticker above the fold — clear it until we scroll.
-  const topOffset = isHome && !isScrolled ? "top-9" : "top-0";
 
   return (
     <>
@@ -88,8 +86,7 @@ export function Header() {
 
       <header
         className={cn(
-          "fixed left-0 right-0 z-50 transition-[top,background-color,padding,transform,box-shadow] duration-450 ease-out-expo",
-          topOffset,
+          "fixed top-0 left-0 right-0 z-50 transition-[background-color,padding,transform,box-shadow] duration-450 ease-out-expo",
           isHidden && !mobileMenuOpen ? "-translate-y-full" : "translate-y-0",
           isLightMode
             ? "bg-ivory/90 backdrop-blur-xl border-b border-ink/10 py-3"

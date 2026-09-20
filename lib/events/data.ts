@@ -201,7 +201,7 @@ export const SEED_EVENTS: GamedayEvent[] = [
     address: "Flushing Meadows Corona Park, Queens, NY 11368",
     mapUrl: "https://maps.google.com/?q=Flushing+Meadows",
     coverImagePath:
-      "https://images.unsplash.com/photo-1508098682722-e99c43a406b2?q=80&w=1200&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1517927033932-b3d18e61fb3a?q=80&w=1200&auto=format&fit=crop",
     acceptsVendors: true,
     vendorOpenCategories: ["Latin Food", "Jerseys"],
   },
@@ -222,7 +222,7 @@ export const SEED_EVENTS: GamedayEvent[] = [
     address: "63 Flushing Ave, Brooklyn, NY 11205",
     mapUrl: "https://maps.google.com/?q=Brooklyn+Navy+Yard",
     coverImagePath:
-      "https://images.unsplash.com/photo-1517649763962-0c623266ddc0?q=80&w=1200&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1459865264687-595d652de67e?q=80&w=1200&auto=format&fit=crop",
     acceptsVendors: true,
     vendorOpenCategories: ["Wings", "Burgers", "Craft Beer"],
   },
@@ -243,7 +243,7 @@ export const SEED_EVENTS: GamedayEvent[] = [
     address: "62 Chelsea Piers, New York, NY 10011",
     mapUrl: "https://maps.google.com/?q=Chelsea+Piers",
     coverImagePath:
-      "https://images.unsplash.com/photo-1526676037777-05a232554f77?q=80&w=1200&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1560272564-c83b66b1ad12?q=80&w=1200&auto=format&fit=crop",
     acceptsVendors: false,
   },
   // Past event for testing the past events toggle

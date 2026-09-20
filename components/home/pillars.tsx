@@ -10,21 +10,19 @@ const PILLARS = [
     id: "01",
     href: "/sports",
     icon: Trophy,
-    eyebrow: "Competitive Leagues",
-    title: ["1V1 &", "INTRAMURAL", "BRACKETS"],
-    body: "Single-elimination live brackets, captain-led team management, automatic seed and bye calculation, and waitlist promotions that run themselves.",
-    cta: "Explore Sports & Divisions",
+    title: ["PLAY", "A BRACKET"],
+    body: "Enter as a team, or enter alone and we'll put you on one. We handle seeding, scheduling and refs; you show up and play.",
+    cta: "See divisions and dates",
     image:
       "https://images.unsplash.com/photo-1574629810360-7efbbe195018?q=80&w=1200&auto=format&fit=crop",
   },
   {
     id: "02",
-    href: "/vendors",
+    href: "/vendors/apply",
     icon: Store,
-    eyebrow: "Zero Competing Offerings",
-    title: ["CURATED", "VENDOR", "MARKET"],
-    body: "A subcategory-locked capacity engine guarantees exclusivity. Multi-step applications, photo portfolios, 48-hour approval holds, and Stripe checkout.",
-    cta: "Vendor Application Portal",
+    title: ["SELL", "AT AN EVENT"],
+    body: "We take one vendor per food category per event, so you're not parked next to three other taco trucks. Apply free; you only pay if we give you the slot.",
+    cta: "Apply for a slot",
     image:
       "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?q=80&w=1200&auto=format&fit=crop",
   },
@@ -32,41 +30,35 @@ const PILLARS = [
     id: "03",
     href: "/sponsors",
     icon: Users,
-    eyebrow: "Sponsors & Community",
-    title: ["SPONSOR", "PARTNER-", "SHIPS"],
-    body: "Tiered partner activation, audience analytics, community event submission pipelines, and branded media coverage across every fixture.",
-    cta: "Partner With Us",
+    title: ["SPONSOR", "A TOURNAMENT"],
+    body: "For local businesses that want their name on a weekend bracket. We'll tell you who turns up and what you get for it.",
+    cta: "Talk to us about it",
     image:
       "https://images.unsplash.com/photo-1511192336575-5a79af67a629?q=80&w=1200&auto=format&fit=crop",
   },
 ];
 
-/** Three editorial pillar panels — image plate, oversized index, hover tilt. */
+/** Three ways into GAMEDAY — play, sell, or sponsor. */
 export function Pillars() {
   return (
     <section className="relative bg-ink text-ivory py-16 sm:py-20 md:py-32 w-full grain overflow-hidden">
       <div className="relative max-w-stadium mx-auto px-4 sm:px-6 lg:px-12">
         <div className="mb-12 sm:mb-16 md:mb-24 max-w-4xl">
+          {/* One of the two eyebrows kept on this page */}
           <Reveal variant="fade" duration={600}>
             <span className="flex items-center gap-2.5 text-[10px] sm:text-xs font-headline tracking-[0.25em] uppercase text-gold">
               <span className="h-px w-6 bg-gold shrink-0" />
-              Core Operations
+              Three ways in
             </span>
           </Reveal>
 
           <SplitHeadline
             as="h2"
-            lines={["BUILT FOR GAME DAY", "EXCELLENCE"]}
+            lines={["PLAY, SELL,", "OR BACK A BRACKET"]}
             stagger={100}
-            className="text-[2rem] xs:text-4xl sm:text-6xl lg:text-7xl font-headline uppercase tracking-[-0.03em] leading-[0.88] text-ivory mt-3"
+            className="text-[2rem] xs:text-4xl sm:text-6xl lg:text-7xl font-headline uppercase tracking-[-0.02em] leading-[1.02] text-ivory mt-3"
+            lineClassName="pb-[0.05em]"
           />
-
-          <Reveal variant="up" delay={200}>
-            <p className="text-sm sm:text-base text-ivory/60 font-body mt-5 max-w-xl leading-relaxed">
-              One platform running the whole operation — the bracket, the marketplace, and the
-              partners who make the day possible.
-            </p>
-          </Reveal>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6 lg:gap-8 perspective-1000">
@@ -77,9 +69,9 @@ export function Pillars() {
                 <Tilt max={4} className="h-full">
                   <Link
                     href={pillar.href}
-                    className="group relative flex h-full min-h-[420px] sm:min-h-[480px] lg:min-h-[560px] flex-col justify-between overflow-hidden border border-ivory/12 bg-ivory/[0.04] p-5 sm:p-7 transition-colors duration-450 ease-out-expo hover:border-gold/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
+                    className="group relative flex h-full min-h-[380px] sm:min-h-[420px] lg:min-h-[480px] flex-col justify-between overflow-hidden border border-ivory/12 bg-ivory/[0.04] p-5 sm:p-7 transition-colors duration-450 ease-out-expo hover:border-gold/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
                   >
-                    {/* Image plate fades up from the floor of the panel on hover */}
+                    {/* Image plate fades in behind the copy on hover */}
                     <div className="absolute inset-0 opacity-0 transition-opacity duration-900 ease-out-expo group-hover:opacity-100">
                       <Image
                         src={pillar.image}
@@ -99,11 +91,7 @@ export function Pillars() {
                         </span>
                       </div>
 
-                      <span className="mt-6 sm:mt-8 block text-[10px] sm:text-xs font-headline tracking-[0.22em] uppercase text-ivory/55">
-                        {pillar.eyebrow}
-                      </span>
-
-                      <h3 className="text-[1.75rem] xs:text-3xl sm:text-4xl font-headline uppercase text-ivory mt-2 leading-[0.9] tracking-tight">
+                      <h3 className="mt-7 sm:mt-9 text-[1.75rem] xs:text-3xl sm:text-4xl font-headline uppercase text-ivory leading-[1.02] tracking-tight">
                         {pillar.title.map((line) => (
                           <span key={line} className="block">
                             {line}
@@ -111,7 +99,7 @@ export function Pillars() {
                         ))}
                       </h3>
 
-                      <p className="text-[13px] sm:text-sm text-ivory/65 font-body mt-4 leading-relaxed max-w-sm">
+                      <p className="text-[13px] sm:text-sm text-ivory/70 font-body mt-4 leading-relaxed max-w-sm">
                         {pillar.body}
                       </p>
                     </div>

@@ -1,5 +1,3 @@
-"use client";
-
 import Link from "next/link";
 import { Logo } from "@/components/brand/logo";
 import { Button } from "@/components/ui/button";
@@ -15,12 +13,6 @@ export function Footer() {
             <p className="text-ivory/70 text-sm leading-relaxed max-w-sm font-body mt-2">
               The premier operations and community tournament platform. High-energy sports leagues, curated vendor markets, and championship events.
             </p>
-            <div className="flex items-center gap-2 mt-2">
-              <span className="inline-block w-2 h-2 rounded-full bg-gold animate-pulse" />
-              <span className="text-xs font-headline uppercase tracking-widest text-gold">
-                Live Development Preview
-              </span>
-            </div>
           </div>
 
           {/* Quick Nav */}
@@ -64,26 +56,17 @@ export function Footer() {
             </Link>
           </div>
 
-          {/* Mailing List Mini-Block */}
+          {/* Email capture lives once on the page, in the closing panel */}
           <div className="col-span-2 md:col-span-4 flex flex-col gap-3">
             <h4 className="text-xs font-headline tracking-widest text-ivory/50 uppercase mb-2">
-              Stay In The Game
+              Get the schedule
             </h4>
-            <p className="text-xs text-ivory/70 leading-relaxed font-body">
-              Be the first to know when tournament registrations, vendor windows, and tickets drop.
+            <p className="text-xs text-ivory/70 leading-relaxed font-body max-w-sm">
+              We email when registration opens for a tournament, and when vendor slots go live.
             </p>
-            {/* Stacks until lg — the column is only 4/12 wide at md and cannot fit a row */}
-            <form className="flex flex-col lg:flex-row gap-2 mt-2" onSubmit={(e) => e.preventDefault()}>
-              <input
-                type="email"
-                placeholder="YOUR EMAIL"
-                className="w-full min-w-0 flex-grow bg-ivory/10 border border-ivory/20 px-4 py-3 text-sm text-ivory placeholder:text-ivory/40 focus:outline-none focus:ring-2 focus:ring-gold min-h-[48px] rounded-none"
-                aria-label="Email address for updates"
-              />
-              <Button type="submit" variant="primary" size="default" className="shrink-0 whitespace-nowrap">
-                Subscribe
-              </Button>
-            </form>
+            <Button asChild variant="primary" size="default" className="mt-2 self-start">
+              <Link href="/join">Join the list</Link>
+            </Button>
           </div>
         </div>
 

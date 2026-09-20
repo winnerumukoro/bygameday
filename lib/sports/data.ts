@@ -148,7 +148,7 @@ export const SPORTS: Sport[] = [
     id: "d0000000-0000-0000-0000-000000000003",
     name: "Soccer / Futsal",
     slug: "soccer",
-    imagePath: "https://images.unsplash.com/photo-1508098682722-e99c43a406b2?q=80&w=1200&auto=format&fit=crop",
+    imagePath: "https://images.unsplash.com/photo-1517927033932-b3d18e61fb3a?q=80&w=1200&auto=format&fit=crop",
     isActive: true,
     tagline: "5v5 High-Speed Turf & Futsal Derby",
     description: "Enclosed court cage soccer tournament prioritizing flair, quick feet, and fast transitions.",
