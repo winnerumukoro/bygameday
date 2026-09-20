@@ -27,3 +27,14 @@ This document records architectural, design, and business logic decisions made a
 - **Currency & Timezone:** Currency is USD (amounts stored in cents). Event timezone stored per event (default `America/New_York`), with UTC timestamps in database.
 - **Tournament Brackets:** Single elimination with automatic bye calculation for non-powers-of-two (top seeds receive round 1 byes).
 - **Waivers:** Versioned in `waiver_versions`. Immutable signature records captured in `waiver_signatures` with IP address, user-agent, and timestamp.
+
+---
+
+## 3. Phase 3: Vendor Marketplace & Payments Decisions
+- **Multi-Step Progressive Validation:** 4-step wizard (Business Info → Category & Tournament Selection → Inline Legal Waiver → Summary & Submit) using Zod schemas split per step with client-side error reflection before moving forward.
+- **Upfront Fee Transparency:** Permit fees are displayed directly on tournament cards and in the event selector ($150 - $350 based on event scale and subcategory) so vendors know operating costs before curation review.
+- **Single-Category Exclusivity Engine:** Strict `max_slots` per subcategory per event. When slots are full, applicants are automatically placed into the in-memory/database waitlist with queue position tracking.
+- **Single-Use Payment Links:** Following curation approval, vendors receive a dedicated payment URL (`/vendors/pay/[token]`) with a 48-hour deadline countdown, initiating a Stripe Checkout session with line items and metadata tags (`slot_id`, `application_id`, `purpose: vendor_fee`).
+- **Webhook Slot Confirmation:** Stripe `checkout.session.completed` events are received at `/api/stripe/webhooks`, verifying the Stripe signature and confirming the vendor's tournament slot with audit logging.
+- **Graceful Stripe Fallback:** If `STRIPE_SECRET_KEY` is not present in `.env.local` or is set to placeholder values, payment routes return actionable configuration notices rather than breaking Next.js runtime execution.
+
