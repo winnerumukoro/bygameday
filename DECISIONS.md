@@ -38,3 +38,14 @@ This document records architectural, design, and business logic decisions made a
 - **Webhook Slot Confirmation:** Stripe `checkout.session.completed` events are received at `/api/stripe/webhooks`, verifying the Stripe signature and confirming the vendor's tournament slot with audit logging.
 - **Graceful Stripe Fallback:** If `STRIPE_SECRET_KEY` is not present in `.env.local` or is set to placeholder values, payment routes return actionable configuration notices rather than breaking Next.js runtime execution.
 
+---
+
+## 4. Phase 4: Sports Registration, Team Rosters & Tournament Brackets Decisions
+- **Dual Competitive Formats:** Platform supports two distinct competition models — *1v1 King of Court* (individual showdown, per-player fee, 30-minute checkout hold) and *Intramural Team Brackets* (captain-led squad registration, per-team fee, shareable invite code roster building).
+- **Captain-Led Roster Model:** The team captain registers the squad, pays the team fee, and receives a unique invite code (e.g., `UPTOWN-882`). Teammates join via `/teams/join/[inviteCode]` and independently sign the athletic liability waiver.
+- **Roster Eligibility Gating:** Teams are only tournament-eligible when three conditions are met: (1) team fee paid, (2) captain waiver signed, (3) division roster minimum met with all rostered players having signed waivers.
+- **Athletic Waiver Enforcement:** Every competitor — 1v1 athletes, team captains, rostered players, and free agents — must electronically sign the versioned Athletic Participation & Injury Release (Section A, v1) before being eligible to compete.
+- **Single-Elimination Bracket Engine:** Automatic bye calculation for non-powers-of-two using `nextPowerOfTwo()`. Top seeds receive round 1 byes. Standard round naming (Round of 16, Quarterfinals, Semifinals, Championship). Match states: Scheduled, In Progress (Live), Completed, Bye.
+- **Free Agent Pool:** Solo athletes register into a public directory browsable by team captains. Free agents sign the athletic waiver at registration time so they are immediately game-ready when drafted.
+
+
