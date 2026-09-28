@@ -174,6 +174,16 @@ export function EventOperationsTable({ initialEvents }: EventOperationsTableProp
                   </td>
                 </tr>
               ))}
+              {filteredEvents.length === 0 && (
+                <tr>
+                  <td
+                    colSpan={6}
+                    className="py-10 px-4 text-center text-xs font-body text-ink/50"
+                  >
+                    No events yet. Events will appear here once a data source is connected.
+                  </td>
+                </tr>
+              )}
             </tbody>
           </table>
         </div>

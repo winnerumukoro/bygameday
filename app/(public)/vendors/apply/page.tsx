@@ -12,7 +12,7 @@ import { ArrowLeft, Store } from "lucide-react";
 export const metadata: Metadata = {
   title: "Apply as a Vendor — GAMEDAY",
   description:
-    "Apply to become an official vendor at GAMEDAY tournaments. Free submission, curated selection, single-category exclusivity guaranteed.",
+    "Apply to sell at GAMEDAY tournaments. Free to apply. One vendor per food category per event.",
 };
 
 interface ApplyPageProps {
@@ -54,7 +54,7 @@ export default async function VendorApplyPage({ searchParams }: ApplyPageProps) 
             </div>
 
             <p className="text-xs sm:text-sm text-ink/60 font-body max-w-sm sm:text-right">
-              Free to submit. 48h payment hold upon curation approval. Single-category exclusivity guaranteed.
+              Free to apply. If approved, you have 48 hours to pay and hold your slot. One vendor per food category per event.
             </p>
           </div>
         </div>

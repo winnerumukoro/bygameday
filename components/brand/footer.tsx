@@ -11,7 +11,7 @@ export function Footer() {
           <div className="col-span-2 md:col-span-4 flex flex-col items-start gap-4">
             <Logo variant="light" />
             <p className="text-ivory/70 text-sm leading-relaxed max-w-sm font-body mt-2">
-              The premier operations and community tournament platform. High-energy sports leagues, curated vendor markets, and championship events.
+              Weekend sports tournaments with local food vendors on site. Enter with a team or on your own.
             </p>
           </div>
 
@@ -42,9 +42,6 @@ export function Footer() {
             <h4 className="text-xs font-headline tracking-widest text-ivory/50 uppercase mb-2">
               Connect
             </h4>
-            <Link href="/events/submit" className="text-sm text-ivory/80 hover:text-gold transition-colors">
-              Submit Event
-            </Link>
             <Link href="/vendors/apply" className="text-sm text-ivory/80 hover:text-gold transition-colors">
               Vendor Application
             </Link>

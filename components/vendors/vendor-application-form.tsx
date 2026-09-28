@@ -291,7 +291,7 @@ export function VendorApplicationForm({
                 </label>
                 <input
                   {...register("businessName")}
-                  placeholder="e.g. Gotham Smash Burgers"
+                  placeholder="Your business name"
                   className="w-full px-3.5 py-3 border-2 border-ink/15 bg-white text-sm font-body text-ink focus:outline-none focus:border-gold"
                 />
                 {errors.businessName && (
@@ -305,7 +305,7 @@ export function VendorApplicationForm({
                 </label>
                 <input
                   {...register("contactName")}
-                  placeholder="e.g. Jordan Williams"
+                  placeholder="Full name"
                   className="w-full px-3.5 py-3 border-2 border-ink/15 bg-white text-sm font-body text-ink focus:outline-none focus:border-gold"
                 />
                 {errors.contactName && (
@@ -322,7 +322,7 @@ export function VendorApplicationForm({
                 <input
                   {...register("email")}
                   type="email"
-                  placeholder="jordan@brand.com"
+                  placeholder="name@business.com"
                   className="w-full px-3.5 py-3 border-2 border-ink/15 bg-white text-sm font-body text-ink focus:outline-none focus:border-gold"
                 />
                 {errors.email && (
@@ -350,7 +350,7 @@ export function VendorApplicationForm({
                 </label>
                 <input
                   {...register("city")}
-                  placeholder="New York, NY"
+                  placeholder="City, State"
                   className="w-full px-3.5 py-3 border-2 border-ink/15 bg-white text-sm font-body text-ink focus:outline-none focus:border-gold"
                 />
                 {errors.city && (

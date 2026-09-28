@@ -99,7 +99,7 @@ export function WaiverAuditTable({ initialRecords }: WaiverAuditTableProps) {
                 <th className="py-3 px-4">Role & Entity</th>
                 <th className="py-3 px-4">Version</th>
                 <th className="py-3 px-4">IP Address</th>
-                <th className="py-3 px-4">Signed Timestamp (EST)</th>
+                <th className="py-3 px-4">Signed Timestamp (CT)</th>
                 <th className="py-3 px-4">Client Device / UA</th>
               </tr>
             </thead>
@@ -142,6 +142,16 @@ export function WaiverAuditTable({ initialRecords }: WaiverAuditTableProps) {
                   </td>
                 </tr>
               ))}
+              {filteredRecords.length === 0 && (
+                <tr>
+                  <td
+                    colSpan={6}
+                    className="py-10 px-4 text-center text-xs font-body text-ink/50"
+                  >
+                    No waiver signatures recorded yet.
+                  </td>
+                </tr>
+              )}
             </tbody>
           </table>
         </div>

@@ -21,7 +21,7 @@ export default function AdminTournamentsPage() {
 
         <div className="text-xs font-body text-ink/70 sm:text-right">
           <span className="block font-semibold">Active Tournament:</span>
-          <span>Interhouse 5v5 Basketball (Men&apos;s Open)</span>
+          <span>None selected</span>
         </div>
       </div>
 

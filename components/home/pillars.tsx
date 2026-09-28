@@ -11,7 +11,7 @@ const PILLARS = [
     href: "/sports",
     icon: Trophy,
     title: ["PLAY", "A BRACKET"],
-    body: "Enter as a team, or enter alone and we'll put you on one. We handle seeding, scheduling and refs; you show up and play.",
+    body: "Enter as a team, or enter alone and we'll put you on one. We handle seeding and scheduling; you show up and play.",
     cta: "See divisions and dates",
     image:
       "https://images.unsplash.com/photo-1574629810360-7efbbe195018?q=80&w=1200&auto=format&fit=crop",

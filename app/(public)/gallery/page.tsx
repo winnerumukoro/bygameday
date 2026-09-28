@@ -6,105 +6,13 @@ import { Play } from "lucide-react";
 import { Lightbox, GalleryItem } from "@/components/gallery/lightbox";
 import { cn } from "@/lib/utils";
 
-const GALLERY_ITEMS: GalleryItem[] = [
-  {
-    id: "g1",
-    type: "image",
-    src: "https://images.unsplash.com/photo-1546519638-68e109498ffc?q=80&w=1400&auto=format&fit=crop",
-    caption: "Championship point on the line during the Austin Men's 5v5 Open final.",
-    category: "Basketball",
-    eventTitle: "Austin 5v5 Championship",
-  },
-  {
-    id: "g2",
-    type: "image",
-    src: "https://images.unsplash.com/photo-1574629810360-7efbbe195018?q=80&w=1400&auto=format&fit=crop",
-    caption: "Overtime intensity under the lights at Pan Am Neighborhood Park.",
-    category: "Basketball",
-    eventTitle: "Pan Am Classic",
-  },
-  {
-    id: "g3",
-    type: "video",
-    src: "https://images.unsplash.com/photo-1511192336575-5a79af67a629?q=80&w=1400&auto=format&fit=crop",
-    videoUrl: "https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ",
-    caption: "Austin Season Highlight Reel: Best plays, buzzer beaters, and crowd energy.",
-    category: "Highlights",
-    eventTitle: "GAMEDAY Season Reel",
-  },
-  {
-    id: "g4",
-    type: "image",
-    src: "https://images.unsplash.com/photo-1552667466-07770ae110d0?q=80&w=1400&auto=format&fit=crop",
-    caption: "Futsal derby penalty shootout at Austin Sports Center under the arena lights.",
-    category: "Soccer",
-    eventTitle: "Austin Futsal Cup",
-  },
-  {
-    id: "g5",
-    type: "image",
-    src: "https://images.unsplash.com/photo-1612872087720-bb876e2e67d1?q=80&w=1400&auto=format&fit=crop",
-    caption: "Sunset finals at the Zilker Park sand volleyball courts.",
-    category: "Volleyball",
-    eventTitle: "Zilker Sand Classic",
-  },
-  {
-    id: "g6",
-    type: "image",
-    src: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?q=80&w=1400&auto=format&fit=crop",
-    caption: "Local Austin taco and barbecue food trucks on concourse row.",
-    category: "Food & Vendors",
-    eventTitle: "Austin Vendor Concourse",
-  },
-  {
-    id: "g7",
-    type: "image",
-    src: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?q=80&w=1400&auto=format&fit=crop",
-    caption: "Tailgate and viewing party setup at Mueller Lake Park amphitheater.",
-    category: "Viewing Parties",
-    eventTitle: "Championship Viewing Party",
-  },
-  {
-    id: "g8",
-    type: "image",
-    src: "https://images.unsplash.com/photo-1459865264687-595d652de67e?q=80&w=1400&auto=format&fit=crop",
-    caption: "Crowd reacting to the game-winning kick during the Austin 7v7 final.",
-    category: "Fan Energy",
-    eventTitle: "Austin 7v7 Summer Bowl",
-  },
-  {
-    id: "g9",
-    type: "image",
-    src: "https://images.unsplash.com/photo-1566577739112-5180d4bf9390?q=80&w=1400&auto=format&fit=crop",
-    caption: "Krieg Fields Flag Football Championship trophy presentation.",
-    category: "Football",
-    eventTitle: "Krieg Fields Flag Bowl",
-  },
-  {
-    id: "g10",
-    type: "image",
-    src: "https://images.unsplash.com/photo-1628891435222-065925dcb365?q=80&w=1400&auto=format&fit=crop",
-    caption: "Pickleball open championship matches at South Austin Recreation Center.",
-    category: "Pickleball",
-    eventTitle: "Austin Pickleball Open",
-  },
-  {
-    id: "g11",
-    type: "image",
-    src: "https://images.unsplash.com/photo-1452626038306-9aae5e071dd3?q=80&w=1400&auto=format&fit=crop",
-    caption: "Community morning warmup run around Lady Bird Lake before first tip-off.",
-    category: "Community",
-    eventTitle: "Lady Bird Lake 5K Walk/Run",
-  },
-  {
-    id: "g12",
-    type: "image",
-    src: "https://images.unsplash.com/photo-1560272564-c83b66b1ad12?q=80&w=1400&auto=format&fit=crop",
-    caption: "Division winners hoisting the tournament trophy at Pease District Park.",
-    category: "Fan Energy",
-    eventTitle: "Pease Park Community Clash",
-  },
-];
+/*
+ * Empty on purpose. This held twelve stock photographs captioned as GAMEDAY's
+ * own past events — trophy presentations at Krieg Fields, sunset finals at
+ * Zilker — none of which happened, plus a "season highlight reel" pointing at
+ * an unrelated YouTube video. Add real event photography here as it is shot.
+ */
+const GALLERY_ITEMS: GalleryItem[] = [];
 
 const CATEGORIES = [
   "All",
@@ -137,17 +45,22 @@ export default function GalleryPage() {
             MEDIA & ATMOSPHERE
           </h1>
           <p className="text-sm sm:text-base text-ink/70 font-body max-w-2xl mt-4 leading-relaxed">
-            High-definition tournament captures, court intensity, curated food vendor setups, and community celebration moments.
+            Photography and video from our tournaments — the courts, the vendor row, and the
+            crowd.
           </p>
         </div>
 
         <div className="text-xs font-headline uppercase tracking-wider text-ink/50 bg-ink/5 px-3 py-2 border border-ink/10 self-start md:self-auto">
-          Official Media Archive
+          Media Archive
         </div>
       </div>
 
-      {/* Category Filter Chips */}
-      <div className="flex flex-wrap items-center gap-2 mb-10" role="group" aria-label="Gallery category filters">
+      {/* Category Filter Chips — only useful once there is something to filter */}
+      <div
+        className={cn("flex-wrap items-center gap-2 mb-10", GALLERY_ITEMS.length === 0 ? "hidden" : "flex")}
+        role="group"
+        aria-label="Gallery category filters"
+      >
         {CATEGORIES.map((cat) => {
           const isActive = activeCategory === cat;
           return (
@@ -168,6 +81,18 @@ export default function GalleryPage() {
           );
         })}
       </div>
+
+      {filteredItems.length === 0 && (
+        <div className="border-2 border-dashed border-ink/20 bg-white py-20 px-6 text-center">
+          <h2 className="font-headline text-2xl uppercase tracking-tight text-ink">
+            Nothing Shot Yet
+          </h2>
+          <p className="text-sm text-ink/60 font-body max-w-md mx-auto mt-3">
+            Photos and clips go up here after our first tournaments. Come play in one and
+            you will probably end up on this page.
+          </p>
+        </div>
+      )}
 
       {/* Grid of Media Tiles */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">

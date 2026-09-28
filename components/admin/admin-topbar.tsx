@@ -7,8 +7,6 @@ import { BroadcastModal } from "./broadcast-modal";
 import { Button } from "@/components/ui/button";
 import {
   Clock,
-  Radio,
-  MapPin,
   Megaphone,
   Trophy,
 } from "lucide-react";
@@ -37,31 +35,14 @@ export function AdminTopbar({ currentRole = "Tournament Director" }: AdminTopbar
   return (
     <>
       <header className="min-h-16 bg-white border-b-2 border-ink/15 px-4 sm:px-6 py-2.5 flex items-center justify-between gap-3 sticky top-0 z-20 shadow-xs">
-        {/* Left Venue & Match Telemetry Strip */}
-        <div className="flex items-center gap-3 sm:gap-4 text-xs font-body min-w-0">
-          {/* Active Venue Indicator */}
-          <div className="flex items-center gap-2 min-w-0">
-            <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse shrink-0" />
-            <div className="flex items-center gap-1.5 text-ink font-bold min-w-0">
-              <MapPin className="w-4 h-4 text-gold shrink-0" />
-              <span className="font-headline uppercase tracking-wide text-xs sm:text-sm truncate">
-                Rucker Park Arena
-              </span>
-            </div>
-          </div>
-
-          <span className="hidden md:inline text-ink/20">|</span>
-
-          {/* Live Tournament Ticker */}
-          <div className="hidden lg:flex items-center gap-2 text-ink/75 bg-ink/[0.03] px-2.5 py-1 border border-ink/10">
-            <span className="px-1.5 py-0.5 bg-red-600 text-white text-[9px] font-headline uppercase tracking-wider flex items-center gap-1">
-              <Radio className="w-2.5 h-2.5 animate-pulse" />
-              LIVE
-            </span>
-            <span className="font-headline uppercase tracking-wider text-[11px] text-ink truncate max-w-[280px]">
-              Interhouse 5v5 Semifinals • Court 1 & 2
-            </span>
-          </div>
+        {/*
+          The venue name and "LIVE" match ticker that sat here were invented.
+          They return when a real event feed can say what is actually running.
+        */}
+        <div className="flex items-center gap-2 text-xs font-body min-w-0">
+          <span className="font-headline uppercase tracking-wide text-xs sm:text-sm text-ink truncate">
+            Operations Console
+          </span>
         </div>
 
         {/* Right Controls: Stadium Clock, Fast Actions, Staff Identity */}
@@ -71,7 +52,7 @@ export function AdminTopbar({ currentRole = "Tournament Director" }: AdminTopbar
             <Clock className="w-3.5 h-3.5 text-gold" />
             <div className="flex items-baseline gap-1.5 font-mono">
               <span className="font-bold text-ink">{currentTime || "12:00:00 PM"}</span>
-              <span className="text-[10px] text-ink/50 uppercase">EST</span>
+              <span className="text-[10px] text-ink/50 uppercase">CT</span>
               <span className="text-[10px] text-ink/40 hidden md:inline">({currentDate || "Today"})</span>
             </div>
           </div>

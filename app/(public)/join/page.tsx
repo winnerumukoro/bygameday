@@ -4,23 +4,36 @@ import * as React from "react";
 import Link from "next/link";
 import { ArrowLeft, CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { subscribeToMailingList } from "@/lib/leads/actions";
+
+type Interest = "tournaments" | "vendors" | "spectator";
 
 export default function JoinPage() {
   const [submitted, setSubmitted] = React.useState(false);
+  const [pending, setPending] = React.useState(false);
+  const [error, setError] = React.useState<string | null>(null);
   const [email, setEmail] = React.useState("");
   const [firstName, setFirstName] = React.useState("");
-  const [interests, setInterests] = React.useState<string[]>([]);
+  const [interests, setInterests] = React.useState<Interest[]>([]);
 
-  const toggleInterest = (val: string) => {
+  const toggleInterest = (val: Interest) => {
     setInterests((prev) =>
       prev.includes(val) ? prev.filter((item) => item !== val) : [...prev, val]
     );
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!email) return;
-    setSubmitted(true);
+    setPending(true);
+    setError(null);
+    const result = await subscribeToMailingList({ email, firstName, interests, source: "join_page" });
+    setPending(false);
+    if (result.success) {
+      setSubmitted(true);
+    } else {
+      setError(result.error ?? "Something went wrong. Please try again.");
+    }
   };
 
   return (
@@ -38,10 +51,10 @@ export default function JoinPage() {
           Stay Connected
         </span>
         <h1 className="text-4xl sm:text-6xl font-headline uppercase text-ink tracking-tight leading-tighter">
-          JOIN THE GAMEDAY DISPATCH
+          JOIN THE MAILING LIST
         </h1>
         <p className="text-base text-ink/70 font-body mt-3 leading-relaxed">
-          Get first access to team registration drops, vendor marketplace slots, and ticket releases before they open to the public.
+          We email when registration opens for a tournament and when vendor slots go live.
         </p>
       </div>
 
@@ -54,7 +67,7 @@ export default function JoinPage() {
             YOU&apos;RE ON THE LIST
           </h2>
           <p className="text-sm text-ivory/80 font-body leading-relaxed">
-            Thank you for registering, <strong className="text-ivory">{firstName || "Athlete"}</strong> ({email}). We&apos;ll notify you the moment 2026 tournament brackets and vendor slots go live.
+            Thanks, <strong className="text-ivory">{firstName}</strong>. We&apos;ll email {email} when registration or vendor slots open.
           </p>
           <Button asChild variant="primary" size="default" className="mt-2">
             <Link href="/">Back to Home</Link>
@@ -95,11 +108,11 @@ export default function JoinPage() {
               I am interested in (select all that apply):
             </label>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 pt-1">
-              {[
+              {([
                 { id: "tournaments", label: "Playing / Sports" },
                 { id: "vendors", label: "Vendor Marketplace" },
                 { id: "spectator", label: "Attending / Fan" },
-              ].map((opt) => {
+              ] as { id: Interest; label: string }[]).map((opt) => {
                 const active = interests.includes(opt.id);
                 return (
                   <button
@@ -127,12 +140,18 @@ export default function JoinPage() {
               className="mt-1 h-4 w-4 rounded-none border-ink/40 text-gold focus:ring-gold"
             />
             <label htmlFor="consent" className="text-xs text-ink/70 font-body leading-tight">
-              I agree to receive event updates, tournament drop alerts, and news from GAMEDAY. You can unsubscribe at any time.
+              I agree to receive emails from GAMEDAY about events and registration. You can unsubscribe at any time.
             </label>
           </div>
 
-          <Button type="submit" variant="primary" size="lg" fullWidthMobile={true}>
-            Confirm Subscription
+          {error && (
+            <p role="alert" className="text-sm text-red-600 font-body">
+              {error}
+            </p>
+          )}
+
+          <Button type="submit" variant="primary" size="lg" fullWidthMobile={true} disabled={pending}>
+            {pending ? "Saving..." : "Confirm Subscription"}
           </Button>
         </form>
       )}

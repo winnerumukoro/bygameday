@@ -5,22 +5,22 @@ import "./globals.css";
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://bygameday.com"),
   title: {
-    default: "GAMEDAY | Austin Sports Tournaments",
+    default: "GAMEDAY | Sports Tournaments",
     template: "%s | GAMEDAY",
   },
   description:
-    "Weekend sports brackets around Austin — basketball, volleyball, soccer, flag football and pickleball — with local food vendors on site.",
+    "Weekend sports brackets in basketball, volleyball, soccer, flag football and pickleball, with local food vendors on site.",
   keywords: [
     "GAMEDAY",
-    "Austin sports tournaments",
-    "Austin intramural sports",
-    "1v1 basketball Austin",
-    "Austin pickup soccer",
-    "Austin local food trucks",
+    "sports tournaments",
+    "intramural sports",
+    "1v1 basketball",
+    "flag football tournament",
+    "pickleball tournament",
     "tournament brackets",
-    "Austin sports",
+    "food vendors",
   ],
-  authors: [{ name: "GAMEDAY Operations Team" }],
+  authors: [{ name: "GAMEDAY" }],
   creator: "GAMEDAY",
   publisher: "GAMEDAY",
   alternates: {
@@ -31,15 +31,15 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: "https://bygameday.com",
     siteName: "GAMEDAY",
-    title: "GAMEDAY | Austin Sports Tournaments",
+    title: "GAMEDAY | Sports Tournaments",
     description:
-      "Weekend sports brackets around Austin — basketball, volleyball, soccer, flag football and pickleball — with local food vendors on site.",
+      "Weekend sports brackets in basketball, volleyball, soccer, flag football and pickleball, with local food vendors on site.",
   },
   twitter: {
     card: "summary_large_image",
-    title: "GAMEDAY | Austin Sports Tournaments",
+    title: "GAMEDAY | Sports Tournaments",
     description:
-      "Weekend sports brackets around Austin — basketball, volleyball, soccer, flag football and pickleball — with local food vendors on site.",
+      "Weekend sports brackets in basketball, volleyball, soccer, flag football and pickleball, with local food vendors on site.",
     creator: "@bygameday",
   },
   icons: {

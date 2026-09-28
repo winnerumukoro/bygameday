@@ -4,12 +4,11 @@ import { Button } from "@/components/ui/button";
 import {
   CheckCircle2,
   ArrowRight,
-  Sparkles,
 } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Payment Confirmed — GAMEDAY Vendors",
-  description: "Your GAMEDAY vendor permit has been confirmed.",
+  description: "Your GAMEDAY vendor slot is confirmed.",
 };
 
 interface PaymentConfirmationProps {
@@ -32,7 +31,7 @@ export default async function VendorPaymentConfirmationPage({
             </div>
             <div>
               <span className="text-[11px] font-headline uppercase tracking-widest text-gold block">
-                Official Credential Locked
+                Payment received
               </span>
               <h1 className="text-2xl sm:text-3xl font-headline uppercase tracking-tight text-ink">
                 VENDOR SLOT CONFIRMED
@@ -41,7 +40,7 @@ export default async function VendorPaymentConfirmationPage({
           </div>
 
           <p className="text-sm font-body text-ink/80 leading-relaxed mb-6">
-            Your permit payment has been successfully verified by Stripe. You are now the exclusive approved vendor for your category at the scheduled tournament.
+            Your payment went through and your slot is confirmed. You are the only vendor in your category at this event.
           </p>
 
           {/* Session verification pill */}
@@ -54,51 +53,9 @@ export default async function VendorPaymentConfirmationPage({
             </div>
           )}
 
-          {/* Load-in Checklist */}
-          <div className="space-y-4 mb-8">
-            <h2 className="text-sm font-headline uppercase tracking-wider text-ink/70 pb-2 border-b border-ink/10 flex items-center gap-2">
-              <Sparkles className="w-4 h-4 text-gold" />
-              Tournament Day Protocol
-            </h2>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs font-body">
-              <div className="p-3.5 bg-ink/[0.02] border border-ink/10">
-                <span className="font-headline uppercase tracking-wider text-ink block mb-1">
-                  Load-In Window
-                </span>
-                <p className="text-ink/70">
-                  Arrive strictly 90 minutes prior to spectator gate opening for assigned vehicle bay access.
-                </p>
-              </div>
-
-              <div className="p-3.5 bg-ink/[0.02] border border-ink/10">
-                <span className="font-headline uppercase tracking-wider text-ink block mb-1">
-                  Booth Footprint
-                </span>
-                <p className="text-ink/70">
-                  Standard 10x10 activation square. All branding must fit within your designated perimeter.
-                </p>
-              </div>
-
-              <div className="p-3.5 bg-ink/[0.02] border border-ink/10">
-                <span className="font-headline uppercase tracking-wider text-ink block mb-1">
-                  Permits & Health
-                </span>
-                <p className="text-ink/70">
-                  Physical copies of local municipal food/vendor permits must be posted visibly on-site.
-                </p>
-              </div>
-
-              <div className="p-3.5 bg-ink/[0.02] border border-ink/10">
-                <span className="font-headline uppercase tracking-wider text-ink block mb-1">
-                  Power & Utilities
-                </span>
-                <p className="text-ink/70">
-                  Standard 20A dedicated circuit provided. Bring outdoor-rated 50ft extension cables.
-                </p>
-              </div>
-            </div>
-          </div>
+          <p className="text-sm font-body text-ink/80 leading-relaxed mb-8">
+            Before the event we&apos;ll send you the arrival time, where you&apos;ll set up, and anything you need to bring.
+          </p>
 
           {/* Action buttons */}
           <div className="flex flex-col sm:flex-row gap-3 pt-6 border-t border-ink/10">

@@ -24,7 +24,7 @@ This document records architectural, design, and business logic decisions made a
 - **Refund Policy:** Handled manually in Stripe dashboard by admin, accompanied by an explicit "Mark refunded" audit action in the GAMEDAY admin panel.
 - **Public User Identity:** No mandatory account creation for general participants/applicants. Email serves as the canonical identity. Team captains receive magic-link authentication to manage rosters.
 - **Media / Gallery:** Admin-curated uploads only.
-- **Currency & Timezone:** Currency is USD (amounts stored in cents). Event timezone stored per event (default `America/New_York`), with UTC timestamps in database.
+- **Currency & Timezone:** Currency is USD (amounts stored in cents). Event timezone stored per event (default `America/Chicago`, GAMEDAY's home market), with UTC timestamps in database.
 - **Tournament Brackets:** Single elimination with automatic bye calculation for non-powers-of-two (top seeds receive round 1 byes).
 - **Waivers:** Versioned in `waiver_versions`. Immutable signature records captured in `waiver_signatures` with IP address, user-agent, and timestamp.
 

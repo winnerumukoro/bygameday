@@ -21,8 +21,8 @@ interface HeroProps {
 
 export function Hero({
   title,
-  titleLines = ["AUSTIN", "SPORTS", "TOURNAMENTS"],
-  subtitle = "We run weekend brackets across Austin — basketball, volleyball, soccer, flag football and pickleball — with local food vendors on site. Enter with a team or on your own.",
+  titleLines = ["SPORTS", "TOURNAMENTS"],
+  subtitle = "We run weekend brackets in basketball, volleyball, soccer, flag football and pickleball, with local food vendors on site. Enter with a team or on your own.",
   ctaText = "SEE THE SCHEDULE",
   ctaHref = "/events",
   secondaryCtaText = "ENTER A BRACKET",

@@ -88,7 +88,7 @@ CREATE TABLE events (
   status event_status NOT NULL DEFAULT 'draft',
   starts_at TIMESTAMPTZ NOT NULL,
   ends_at TIMESTAMPTZ NOT NULL,
-  timezone TEXT NOT NULL DEFAULT 'America/New_York',
+  timezone TEXT NOT NULL DEFAULT 'America/Chicago',
   venue_name TEXT NOT NULL,
   address TEXT NOT NULL,
   map_url TEXT,

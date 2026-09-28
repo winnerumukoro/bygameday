@@ -89,20 +89,26 @@ export function SportsHubBrowser({
         <div className="text-center py-16 border-2 border-dashed border-ink/15 bg-white p-8">
           <AlertCircle className="w-8 h-8 text-ink/30 mx-auto mb-3" />
           <h4 className="font-headline text-lg uppercase text-ink mb-1">
-            No Active Divisions Match Your Filter
+            {divisions.length === 0
+              ? "Divisions Not Open Yet"
+              : "No Divisions Match Your Filter"}
           </h4>
           <p className="text-xs text-ink/60 font-body max-w-sm mx-auto mb-4">
-            Try switching sports or clearing your format filter to explore other competitive divisions.
+            {divisions.length === 0
+              ? "Registration windows for the next season have not been published. Join the mailing list and we will let you know when they open."
+              : "Try switching sports or clearing your format filter to see other divisions."}
           </p>
-          <button
-            onClick={() => {
-              setActiveSportSlug("all");
-              setActiveFormat("all");
-            }}
-            className="text-xs font-headline uppercase tracking-wider text-gold hover:underline"
-          >
-            Reset Filters
-          </button>
+          {divisions.length > 0 && (
+            <button
+              onClick={() => {
+                setActiveSportSlug("all");
+                setActiveFormat("all");
+              }}
+              className="text-xs font-headline uppercase tracking-wider text-gold hover:underline"
+            >
+              Reset Filters
+            </button>
+          )}
         </div>
       )}
     </div>

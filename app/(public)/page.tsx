@@ -6,7 +6,7 @@ import { JoinCta } from "@/components/home/join-cta";
 
 /*
  * Sections deliberately not on this page yet, pending real material:
- *  - Upcoming calendar  — the seed events are fabricated New York venues.
+ *  - Upcoming calendar  — no dates are confirmed yet; the seed list is empty.
  *  - "The Atmosphere"   — waiting on the event photo portfolio.
  *  - Stats band         — the figures were invented; removed permanently.
  *  - Project tracker    — internal delivery status, not public-facing.

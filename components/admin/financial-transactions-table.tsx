@@ -111,6 +111,16 @@ export function FinancialTransactionsTable({
                   </tr>
                 );
               })}
+              {transactions.length === 0 && (
+                <tr>
+                  <td
+                    colSpan={6}
+                    className="py-10 px-4 text-center text-xs font-body text-ink/50"
+                  >
+                    No transactions yet. Connect Stripe to see payments here.
+                  </td>
+                </tr>
+              )}
             </tbody>
           </table>
         </div>

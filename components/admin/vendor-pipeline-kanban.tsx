@@ -27,6 +27,14 @@ export function VendorPipelineKanban({
   const [processingId, setProcessingId] = useState<string | null>(null);
   const [actionSuccess, setActionSuccess] = useState<string | null>(null);
 
+  /*
+   * The allocation strip above used to be four hardcoded tiles naming vendors
+   * that do not exist. It now lists whoever actually holds a subcategory slot.
+   */
+  const slotHolders = applications.filter(
+    (app) => app.status === "approved_pending_payment" || app.status === "confirmed"
+  );
+
   const filtered = applications.filter((app) => {
     if (activeFilter === "all") return true;
     return app.status === activeFilter;
@@ -73,53 +81,39 @@ export function VendorPipelineKanban({
           <div className="flex items-center gap-2">
             <Store className="w-4 h-4 text-gold" />
             <h4 className="font-headline text-xs uppercase tracking-wider text-ink">
-              Category Exclusivity Allocation — Interhouse 5v5 Basketball
+              Category Exclusivity Allocation
             </h4>
           </div>
           <span className="text-[11px] text-ink/50 font-body">10x10 Concourse Footprints</span>
         </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs font-body">
-          <div className="p-2.5 bg-ink/[0.02] border border-ink/10">
-            <div className="flex justify-between items-center mb-1">
-              <span className="font-semibold text-ink truncate">Smash Burgers</span>
-              <span className="text-[10px] font-headline uppercase text-red-600 bg-red-100 px-1.5 py-0.5">
-                Locked (1/1)
-              </span>
-            </div>
-            <span className="text-[11px] text-ink/50">Empire Burgers Co.</span>
+        {slotHolders.length === 0 ? (
+          <p className="text-[11px] text-ink/50 font-body py-3">
+            No subcategory is spoken for yet. A slot shows here once an application is
+            approved or paid.
+          </p>
+        ) : (
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs font-body">
+            {slotHolders.map((app) => (
+              <div key={app.id} className="p-2.5 bg-ink/[0.02] border border-ink/10">
+                <div className="flex justify-between items-center gap-2 mb-1">
+                  <span className="font-semibold text-ink truncate">{app.subcategoryName}</span>
+                  <span
+                    className={cn(
+                      "text-[10px] font-headline uppercase px-1.5 py-0.5 shrink-0",
+                      app.status === "confirmed"
+                        ? "text-green-700 bg-green-100"
+                        : "text-amber-700 bg-amber-100"
+                    )}
+                  >
+                    {app.status === "confirmed" ? "Confirmed" : "48h hold"} (1/1)
+                  </span>
+                </div>
+                <span className="text-[11px] text-ink/50 truncate block">{app.businessName}</span>
+              </div>
+            ))}
           </div>
-
-          <div className="p-2.5 bg-ink/[0.02] border border-ink/10">
-            <div className="flex justify-between items-center mb-1">
-              <span className="font-semibold text-ink truncate">Coffee & Drinks</span>
-              <span className="text-[10px] font-headline uppercase text-amber-700 bg-amber-100 px-1.5 py-0.5">
-                48h Hold (1/1)
-              </span>
-            </div>
-            <span className="text-[11px] text-ink/50">Cortado Craft Bar</span>
-          </div>
-
-          <div className="p-2.5 bg-ink/[0.02] border border-ink/10">
-            <div className="flex justify-between items-center mb-1">
-              <span className="font-semibold text-ink truncate">Recovery / Cryo</span>
-              <span className="text-[10px] font-headline uppercase text-green-700 bg-green-100 px-1.5 py-0.5">
-                Confirmed (1/1)
-              </span>
-            </div>
-            <span className="text-[11px] text-ink/50">Empire Cryo Care</span>
-          </div>
-
-          <div className="p-2.5 bg-gold/10 border border-gold/30">
-            <div className="flex justify-between items-center mb-1">
-              <span className="font-semibold text-ink truncate">Sportswear Drop</span>
-              <span className="text-[10px] font-headline uppercase text-ink bg-gold px-1.5 py-0.5 font-bold">
-                Open (0/1)
-              </span>
-            </div>
-            <span className="text-[11px] text-ink/70">Awaiting Curation</span>
-          </div>
-        </div>
+        )}
       </div>
 
       {/* Filter Tabs */}
@@ -178,6 +172,14 @@ export function VendorPipelineKanban({
           <CheckCircle2 className="w-4 h-4 text-green-600" />
           <span>{actionSuccess}</span>
         </div>
+      )}
+
+      {filtered.length === 0 && (
+        <p className="text-sm text-ink/50 font-body py-10 text-center border border-dashed border-ink/15">
+          {applications.length === 0
+            ? "No vendor applications yet."
+            : "No applications in this stage."}
+        </p>
       )}
 
       {/* Applications Cards Grid */}

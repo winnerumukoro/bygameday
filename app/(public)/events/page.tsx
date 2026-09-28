@@ -122,10 +122,11 @@ function EventsContent() {
                 <CalendarX className="w-7 h-7" />
               </div>
               <h3 className="text-2xl font-headline uppercase text-ink">
-                No Events Match Your Filters
+                Nothing On The Schedule Yet
               </h3>
               <p className="text-sm text-ink/60 font-body max-w-md mt-2 mb-6">
-                Try deselecting some categories or toggling on past events to see previous tournament schedules.
+                Dates for the next round of tournaments have not been published. Join the mailing
+                list and we will let you know as soon as they are.
               </p>
               <Button
                 variant="primary"

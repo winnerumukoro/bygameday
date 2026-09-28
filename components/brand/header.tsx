@@ -7,6 +7,7 @@ import { ArrowUpRight, Menu, X } from "lucide-react";
 import { Logo } from "@/components/brand/logo";
 import { Button } from "@/components/ui/button";
 import { ScrollProgress } from "@/components/motion/scroll-progress";
+import { createClient } from "@/lib/supabase/client";
 import { cn } from "@/lib/utils";
 
 const NAV_ITEMS = [
@@ -27,7 +28,22 @@ export function Header() {
   const [isScrolled, setIsScrolled] = React.useState(false);
   const [isHidden, setIsHidden] = React.useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
+  const [signedIn, setSignedIn] = React.useState(false);
   const pathname = usePathname();
+
+  // Auth state for the Log in / Account link
+  React.useEffect(() => {
+    const supabase = createClient();
+    supabase.auth.getSession().then(({ data }) => setSignedIn(Boolean(data.session)));
+    const { data } = supabase.auth.onAuthStateChange((_event, session) => {
+      setSignedIn(Boolean(session));
+    });
+    return () => data.subscription.unsubscribe();
+  }, [pathname]);
+
+  const accountLink = signedIn
+    ? { label: "Account", href: "/account" }
+    : { label: "Log In", href: "/login" };
 
   // Condense on scroll, and tuck away when the reader is heading down the page.
   React.useEffect(() => {
@@ -126,7 +142,16 @@ export function Header() {
             })}
           </nav>
 
-          <div className="hidden lg:flex items-center gap-4">
+          <div className="hidden lg:flex items-center gap-6">
+            <Link
+              href={accountLink.href}
+              className={cn(
+                "text-[13px] font-headline uppercase tracking-[0.12em] transition-colors duration-300",
+                isLightMode ? "text-ink/75 hover:text-ink" : "text-ivory/85 hover:text-ivory"
+              )}
+            >
+              {accountLink.label}
+            </Link>
             <Button asChild variant="primary" size="default" className="group">
               <Link href="/join">
                 <span>Join Now</span>
@@ -216,7 +241,7 @@ export function Header() {
           </ul>
 
           <ul className="mt-8 flex flex-wrap gap-x-6 gap-y-3">
-            {SECONDARY_LINKS.map((link) => (
+            {[...SECONDARY_LINKS, accountLink].map((link) => (
               <li key={link.href}>
                 <Link
                   href={link.href}

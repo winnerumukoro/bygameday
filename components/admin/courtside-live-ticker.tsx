@@ -83,7 +83,7 @@ export function CourtsideLiveTicker({ initialBracket }: CourtsideLiveTickerProps
               </span>
             </div>
             <p className="text-xs text-ink/60 font-body">
-              Real-time point scoring & bracket advancement for Rucker Park
+              Point scoring and bracket advancement
             </p>
           </div>
         </div>

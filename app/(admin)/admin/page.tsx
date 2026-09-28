@@ -7,11 +7,13 @@ import {
   getBroadcastAlerts,
   getFinancialReport,
 } from "@/lib/admin/data";
+import type { FinancialReport } from "@/lib/admin/data";
 import { formatCurrency } from "@/lib/vendors/data";
 import { getAllPublishedEvents } from "@/lib/events/data";
 import { SEED_BRACKET } from "@/lib/sports/data";
 import { CourtsideLiveTicker } from "@/components/admin/courtside-live-ticker";
 import { Button } from "@/components/ui/button";
+import type { LucideIcon } from "lucide-react";
 import {
   Calendar,
   Store,
@@ -20,17 +22,58 @@ import {
   Radio,
   AlertTriangle,
   ChevronRight,
-  TrendingUp,
   Users,
   DollarSign,
   ArrowUpRight,
-  ShieldCheck,
   CreditCard,
   MapPin,
-  Flame,
   CheckCircle2,
-  Clock,
 } from "lucide-react";
+
+/*
+ * Tiles show the stored figure and nothing else. The trend deltas, fill
+ * percentages and stream sparkbars that used to sit under each number were
+ * invented — there is no history to compute any of them from.
+ */
+function MetricTile({
+  label,
+  value,
+  note,
+  icon: Icon,
+}: {
+  label: string;
+  value: string;
+  note: string;
+  icon: LucideIcon;
+}) {
+  return (
+    <div className="border-2 border-ink/15 bg-white p-5 flex flex-col">
+      <div className="flex items-center justify-between gap-2 mb-2">
+        <span className="text-[10px] font-headline uppercase tracking-widest text-ink/50">
+          {label}
+        </span>
+        <Icon className="w-4 h-4 text-gold shrink-0" />
+      </div>
+
+      <span className="font-headline text-3xl sm:text-4xl text-ink tracking-tight block font-mono font-bold">
+        {value}
+      </span>
+
+      <p className="mt-auto pt-3 text-[11px] text-ink/50 font-body">{note}</p>
+    </div>
+  );
+}
+
+/*
+ * Revenue shares are derived from the stored totals. They used to be typed in
+ * by hand (38.1 / 35.0 / 13.6 / 13.3) and did not move when the figures did.
+ */
+const REVENUE_STREAMS = [
+  { label: "Spectator Tickets", barClass: "bg-ink", amountOf: (f: FinancialReport) => f.ticketSalesCents },
+  { label: "Team Entry Fees", barClass: "bg-gold", amountOf: (f: FinancialReport) => f.teamFeesCents },
+  { label: "Vendor Permits", barClass: "bg-amber-600", amountOf: (f: FinancialReport) => f.vendorFeesCents },
+  { label: "Sponsorships", barClass: "bg-emerald-700", amountOf: (f: FinancialReport) => f.sponsorshipCents },
+];
 
 export default function AdminDashboardPage() {
   const kpis = getAdminKPIs();
@@ -41,32 +84,33 @@ export default function AdminDashboardPage() {
   const activeEvents = getAllPublishedEvents({ includePast: false }).slice(0, 4);
   const alerts = getBroadcastAlerts().filter((a) => a.active);
   const financials = getFinancialReport();
+  const share = (cents: number) =>
+    financials.totalGrossCents === 0
+      ? "0.0"
+      : ((cents / financials.totalGrossCents) * 100).toFixed(1);
 
   return (
     <div className="space-y-8">
       {/* ────────────── 1. COMMAND CONSOLE HEADER & TELEMETRY ────────────── */}
       <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 border-b-2 border-ink/15 pb-6">
         <div>
-          {/* Status Gateway Pill Ribbon */}
+          {/*
+            This console is not connected to a data source yet: there is no
+            database, and Stripe has no live key. Say so plainly rather than
+            showing green "active" pills over hardcoded values.
+          */}
           <div className="flex flex-wrap items-center gap-2 mb-2">
-            <span className="text-[10px] font-headline uppercase tracking-[0.2em] text-gold bg-gold/15 px-2 py-0.5 border border-gold/30">
-              REAL-TIME COURTSIDE TELEMETRY
+            <span className="inline-flex items-center gap-1.5 text-[10px] font-body px-2 py-0.5 bg-amber-50 border border-amber-300 text-amber-900">
+              <AlertTriangle className="w-3 h-3 shrink-0" />
+              <span>Not connected — no database or payment provider configured</span>
             </span>
-            <div className="flex items-center gap-1.5 px-2 py-0.5 bg-green-50 border border-green-300 text-[10px] font-body text-green-900">
-              <span className="w-1.5 h-1.5 rounded-full bg-green-600 animate-pulse" />
-              <span>Stripe Gateway Active</span>
-            </div>
-            <div className="flex items-center gap-1.5 px-2 py-0.5 bg-ink/5 border border-ink/15 text-[10px] font-body text-ink/70">
-              <ShieldCheck className="w-3 h-3 text-gold" />
-              <span>ESIGN Gate Pass Enforced</span>
-            </div>
           </div>
 
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-headline uppercase tracking-tight text-ink">
             EXECUTIVE OPS CONSOLE
           </h1>
           <p className="text-xs sm:text-sm text-ink/60 font-body max-w-2xl mt-1">
-            Tournament operations cockpit, real-time match scoring, vendor permit allocation, and legal waiver compliance.
+            Event operations, match scoring, vendor permits and waiver records. Figures stay at zero until a data source is connected.
           </p>
         </div>
 
@@ -111,7 +155,7 @@ export default function AdminDashboardPage() {
                   Active Courtside Broadcast
                 </span>
                 <span className="text-[11px] font-mono text-amber-800">
-                  Posted {format(new Date(alerts[0].postedAt), "h:mm a")} EST
+                  Posted {format(new Date(alerts[0].postedAt), "h:mm a")} CT
                 </span>
               </div>
               <p className="text-xs sm:text-sm text-amber-950 font-body font-medium mt-1">
@@ -128,178 +172,44 @@ export default function AdminDashboardPage() {
         </div>
       )}
 
-      {/* ────────────── 3. REDESIGNED KPI TELEMETRY GRID ────────────── */}
+      {/* ────────────── 3. KPI TILES ────────────── */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4">
-        {/* Metric 1: Gross Revenue */}
-        <div className="border-2 border-ink/15 bg-white p-5 flex flex-col justify-between hover:border-gold transition-colors group shadow-xs">
-          <div>
-            <div className="flex items-center justify-between gap-2 mb-2">
-              <span className="text-[10px] font-headline uppercase tracking-widest text-ink/50">
-                Gross Revenue
-              </span>
-              <DollarSign className="w-4 h-4 text-gold group-hover:scale-110 transition-transform" />
-            </div>
-            <span className="font-headline text-3xl sm:text-4xl text-ink tracking-tight block font-mono font-bold">
-              {formatCurrency(kpis.grossRevenueCents)}
-            </span>
-          </div>
-
-          <div className="mt-4 pt-3 border-t border-ink/10 space-y-1.5">
-            <div className="flex items-center justify-between text-[11px]">
-              <span className="text-emerald-700 font-semibold inline-flex items-center gap-1">
-                <TrendingUp className="w-3 h-3" />
-                +18.4% YoY
-              </span>
-              <span className="text-ink/40 font-mono text-[10px]">Stripe Live</span>
-            </div>
-            {/* Visual Stream Sparkbar */}
-            <div className="w-full h-1.5 bg-ink/10 flex overflow-hidden">
-              <div className="h-full bg-ink" style={{ width: "38%" }} title="Tickets" />
-              <div className="h-full bg-gold" style={{ width: "35%" }} title="Teams" />
-              <div className="h-full bg-amber-600" style={{ width: "14%" }} title="Vendors" />
-              <div className="h-full bg-emerald-700" style={{ width: "13%" }} title="Sponsors" />
-            </div>
-          </div>
-        </div>
-
-        {/* Metric 2: Athletes Rostered */}
-        <div className="border-2 border-ink/15 bg-white p-5 flex flex-col justify-between hover:border-gold transition-colors group shadow-xs">
-          <div>
-            <div className="flex items-center justify-between gap-2 mb-2">
-              <span className="text-[10px] font-headline uppercase tracking-widest text-ink/50">
-                Athletes Rostered
-              </span>
-              <Users className="w-4 h-4 text-gold group-hover:scale-110 transition-transform" />
-            </div>
-            <span className="font-headline text-3xl sm:text-4xl text-ink tracking-tight block font-mono font-bold">
-              {kpis.totalAthletes.toLocaleString()}
-            </span>
-          </div>
-
-          <div className="mt-4 pt-3 border-t border-ink/10 space-y-1.5">
-            <div className="flex items-center justify-between text-[11px]">
-              <span className="text-ink/70 font-medium">5 Tournament Sports</span>
-              <span className="text-gold font-bold font-mono text-[10px]">92% Roster Min</span>
-            </div>
-            <div className="w-full h-1.5 bg-ink/10 overflow-hidden">
-              <div className="h-full bg-gold" style={{ width: "92%" }} />
-            </div>
-          </div>
-        </div>
-
-        {/* Metric 3: Active Events */}
-        <div className="border-2 border-ink/15 bg-white p-5 flex flex-col justify-between hover:border-gold transition-colors group shadow-xs">
-          <div>
-            <div className="flex items-center justify-between gap-2 mb-2">
-              <span className="text-[10px] font-headline uppercase tracking-widest text-ink/50">
-                Active Events
-              </span>
-              <Calendar className="w-4 h-4 text-gold group-hover:scale-110 transition-transform" />
-            </div>
-            <span className="font-headline text-3xl sm:text-4xl text-ink tracking-tight block font-mono font-bold">
-              {kpis.activeEventsCount}
-            </span>
-          </div>
-
-          <div className="mt-4 pt-3 border-t border-ink/10 space-y-1.5">
-            <div className="flex items-center justify-between text-[11px]">
-              <span className="text-ink/70">Capacity Average</span>
-              <span className="font-semibold text-ink font-mono text-[10px]">84% Fill</span>
-            </div>
-            <div className="w-full h-1.5 bg-ink/10 overflow-hidden">
-              <div className="h-full bg-ink" style={{ width: "84%" }} />
-            </div>
-          </div>
-        </div>
-
-        {/* Metric 4: Vendor Queue */}
-        <div className="border-2 border-ink/15 bg-white p-5 flex flex-col justify-between hover:border-gold transition-colors group shadow-xs">
-          <div>
-            <div className="flex items-center justify-between gap-2 mb-2">
-              <span className="text-[10px] font-headline uppercase tracking-widest text-ink/50">
-                Vendor Queue
-              </span>
-              <Store className="w-4 h-4 text-gold group-hover:scale-110 transition-transform" />
-            </div>
-            <span className="font-headline text-3xl sm:text-4xl text-gold tracking-tight block font-mono font-bold">
-              {kpis.pendingVendorApps}
-            </span>
-          </div>
-
-          <div className="mt-4 pt-3 border-t border-ink/10 space-y-1.5">
-            <div className="flex items-center justify-between text-[11px]">
-              <span className="text-amber-700 font-semibold flex items-center gap-1">
-                <Clock className="w-3 h-3" />
-                48h Pay Lock
-              </span>
-              <span className="text-ink/50 font-mono text-[10px]">1/Cat Rule</span>
-            </div>
-            <div className="w-full h-1.5 bg-amber-100 overflow-hidden">
-              <div className="h-full bg-amber-500" style={{ width: "65%" }} />
-            </div>
-          </div>
-        </div>
-
-        {/* Metric 5: Waiver Compliance */}
-        <div className="border-2 border-ink/15 bg-white p-5 flex flex-col justify-between hover:border-gold transition-colors group shadow-xs">
-          <div>
-            <div className="flex items-center justify-between gap-2 mb-2">
-              <span className="text-[10px] font-headline uppercase tracking-widest text-ink/50">
-                Waiver Gate Pass
-              </span>
-              <FileCheck2 className="w-4 h-4 text-green-600 group-hover:scale-110 transition-transform" />
-            </div>
-            <span className="font-headline text-3xl sm:text-4xl text-emerald-700 tracking-tight block font-mono font-bold">
-              {kpis.waiverCompletionRate}%
-            </span>
-          </div>
-
-          <div className="mt-4 pt-3 border-t border-ink/10 space-y-1.5">
-            <div className="flex items-center justify-between text-[11px]">
-              <span className="text-emerald-800 font-semibold flex items-center gap-1">
-                <CheckCircle2 className="w-3 h-3 text-emerald-600" />
-                Verified ESIGN
-              </span>
-              <span className="text-ink/40 font-mono text-[10px]">Gate Clr</span>
-            </div>
-            <div className="w-full h-1.5 bg-emerald-100 overflow-hidden">
-              <div className="h-full bg-emerald-600" style={{ width: `${kpis.waiverCompletionRate}%` }} />
-            </div>
-          </div>
-        </div>
-
-        {/* Metric 6: Live Courtside Matches */}
-        <div className="border-2 border-red-600 bg-red-50/50 p-5 flex flex-col justify-between hover:bg-red-50 transition-colors group shadow-xs">
-          <div>
-            <div className="flex items-center justify-between gap-2 mb-2">
-              <span className="text-[10px] font-headline uppercase tracking-widest text-red-700 font-bold">
-                Courtside Live
-              </span>
-              <Radio className="w-4 h-4 text-red-600 animate-pulse" />
-            </div>
-            <div className="flex items-baseline gap-2">
-              <span className="font-headline text-3xl sm:text-4xl text-red-600 tracking-tight block font-mono font-bold">
-                {kpis.liveMatchesNow}
-              </span>
-              <span className="text-xs font-headline uppercase text-red-700">Matches Active</span>
-            </div>
-          </div>
-
-          <div className="mt-4 pt-3 border-t border-red-200 space-y-1.5">
-            <div className="flex items-center justify-between text-[11px]">
-              <span className="text-red-700 font-semibold">Rucker Park Courts</span>
-              <Link
-                href="/admin/tournaments"
-                className="text-[10px] font-headline uppercase text-red-800 hover:text-black font-bold flex items-center gap-0.5"
-              >
-                Score <ChevronRight className="w-3 h-3" />
-              </Link>
-            </div>
-            <div className="w-full h-1.5 bg-red-200 overflow-hidden">
-              <div className="h-full bg-red-600 animate-pulse" style={{ width: "100%" }} />
-            </div>
-          </div>
-        </div>
+        <MetricTile
+          label="Gross Revenue"
+          value={formatCurrency(kpis.grossRevenueCents)}
+          note="No payment provider connected"
+          icon={DollarSign}
+        />
+        <MetricTile
+          label="Athletes Rostered"
+          value={kpis.totalAthletes.toLocaleString()}
+          note="No registrations recorded"
+          icon={Users}
+        />
+        <MetricTile
+          label="Active Events"
+          value={String(kpis.activeEventsCount)}
+          note="No events published"
+          icon={Calendar}
+        />
+        <MetricTile
+          label="Vendor Queue"
+          value={String(kpis.pendingVendorApps)}
+          note="48-hour pay window, one brand per category"
+          icon={Store}
+        />
+        <MetricTile
+          label="Waiver Gate Pass"
+          value={recentWaivers.length > 0 ? `${kpis.waiverCompletionRate}%` : "—"}
+          note="No signatures recorded"
+          icon={FileCheck2}
+        />
+        <MetricTile
+          label="Courtside Live"
+          value={String(kpis.liveMatchesNow)}
+          note="No matches in progress"
+          icon={Radio}
+        />
       </div>
 
       {/* ────────────── 4. COURTSIDE LIVE MATCH CENTER STRIP ────────────── */}
@@ -334,6 +244,16 @@ export default function AdminDashboardPage() {
               </Button>
             </div>
 
+            {activeEvents.length === 0 && (
+              <p className="text-sm text-ink/50 font-body py-6 text-center border border-dashed border-ink/15">
+                No events published yet. Add one from{" "}
+                <Link href="/admin/events" className="underline hover:text-ink">
+                  Event Operations
+                </Link>
+                .
+              </p>
+            )}
+
             <div className="grid grid-cols-1 gap-3.5">
               {activeEvents.map((evt) => (
                 <div
@@ -365,20 +285,7 @@ export default function AdminDashboardPage() {
                     </p>
                   </div>
 
-                  {/* Right side metrics and actions */}
                   <div className="flex items-center justify-between md:justify-end gap-5 border-t md:border-t-0 pt-3 md:pt-0 border-ink/10 shrink-0">
-                    <div className="text-left md:text-right">
-                      <span className="text-[10px] font-headline uppercase tracking-wider text-ink/40 block">
-                        Gate Capacity
-                      </span>
-                      <div className="flex items-center gap-2">
-                        <div className="w-16 h-2 bg-ink/10 overflow-hidden">
-                          <div className="h-full bg-gold" style={{ width: "78%" }} />
-                        </div>
-                        <span className="font-headline text-xs text-ink font-mono">78%</span>
-                      </div>
-                    </div>
-
                     <div className="flex items-center gap-2">
                       <Button asChild size="sm" variant="secondary" className="text-xs h-8 border-ink/20 hover:border-ink">
                         <Link href={`/events/${evt.slug}`} target="_blank">
@@ -420,6 +327,12 @@ export default function AdminDashboardPage() {
                 </Link>
               </Button>
             </div>
+
+            {pendingVendors.length === 0 && (
+              <p className="text-sm text-ink/50 font-body py-6 text-center border border-dashed border-ink/15">
+                No applications waiting on review.
+              </p>
+            )}
 
             <div className="space-y-3">
               {pendingVendors.map((app) => (
@@ -477,6 +390,12 @@ export default function AdminDashboardPage() {
                 All Logs <ChevronRight className="w-3 h-3" />
               </Link>
             </div>
+
+            {recentWaivers.length === 0 && (
+              <p className="text-xs text-ink/50 font-body py-5 text-center border border-dashed border-ink/15">
+                No waivers signed yet.
+              </p>
+            )}
 
             <div className="space-y-2.5">
               {recentWaivers.map((waiver) => (
@@ -546,76 +465,40 @@ export default function AdminDashboardPage() {
               </span>
             </div>
 
-            {/* Stacked stream bar */}
-            <div className="w-full h-3.5 bg-ink/10 flex overflow-hidden">
-              <div className="h-full bg-ink" style={{ width: "38.1%" }} title="Tickets (38.1%)" />
-              <div className="h-full bg-gold" style={{ width: "35.0%" }} title="Team Fees (35.0%)" />
-              <div className="h-full bg-amber-600" style={{ width: "13.6%" }} title="Vendors (13.6%)" />
-              <div className="h-full bg-emerald-700" style={{ width: "13.3%" }} title="Sponsors (13.3%)" />
-            </div>
+            {financials.totalGrossCents === 0 ? (
+              <p className="text-xs text-ink/50 font-body py-4 text-center border border-dashed border-ink/15">
+                Nothing settled yet — the split appears once payments run through.
+              </p>
+            ) : (
+              <>
+                <div className="w-full h-3.5 bg-ink/10 flex overflow-hidden">
+                  {REVENUE_STREAMS.map((stream) => (
+                    <div
+                      key={stream.label}
+                      className={`h-full ${stream.barClass}`}
+                      style={{ width: `${share(stream.amountOf(financials))}%` }}
+                      title={`${stream.label} (${share(stream.amountOf(financials))}%)`}
+                    />
+                  ))}
+                </div>
 
-            <div className="space-y-1.5 text-[11px] font-body">
-              <div className="flex items-center justify-between">
-                <span className="flex items-center gap-1.5 text-ink/70">
-                  <span className="w-2.5 h-2.5 bg-ink inline-block shrink-0" />
-                  Spectator Tickets
-                </span>
-                <span className="font-mono font-semibold">{formatCurrency(financials.ticketSalesCents)} (38.1%)</span>
-              </div>
-              <div className="flex items-center justify-between">
-                <span className="flex items-center gap-1.5 text-ink/70">
-                  <span className="w-2.5 h-2.5 bg-gold inline-block shrink-0" />
-                  Team Entry Fees
-                </span>
-                <span className="font-mono font-semibold">{formatCurrency(financials.teamFeesCents)} (35.0%)</span>
-              </div>
-              <div className="flex items-center justify-between">
-                <span className="flex items-center gap-1.5 text-ink/70">
-                  <span className="w-2.5 h-2.5 bg-amber-600 inline-block shrink-0" />
-                  Vendor Permits
-                </span>
-                <span className="font-mono font-semibold">{formatCurrency(financials.vendorFeesCents)} (13.6%)</span>
-              </div>
-              <div className="flex items-center justify-between">
-                <span className="flex items-center gap-1.5 text-ink/70">
-                  <span className="w-2.5 h-2.5 bg-emerald-700 inline-block shrink-0" />
-                  Sponsorships
-                </span>
-                <span className="font-mono font-semibold">{formatCurrency(financials.sponsorshipCents)} (13.3%)</span>
-              </div>
-            </div>
+                <div className="space-y-1.5 text-[11px] font-body">
+                  {REVENUE_STREAMS.map((stream) => (
+                    <div key={stream.label} className="flex items-center justify-between">
+                      <span className="flex items-center gap-1.5 text-ink/70">
+                        <span className={`w-2.5 h-2.5 inline-block shrink-0 ${stream.barClass}`} />
+                        {stream.label}
+                      </span>
+                      <span className="font-mono font-semibold">
+                        {formatCurrency(stream.amountOf(financials))} ({share(stream.amountOf(financials))}%)
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </>
+            )}
           </div>
 
-          {/* Courtside Operational Readiness Card */}
-          <div className="border-2 border-ink/15 bg-white p-6 space-y-3.5 shadow-sm">
-            <div className="flex items-center gap-2 pb-2 border-b border-ink/10">
-              <Flame className="w-4 h-4 text-gold" />
-              <h3 className="font-headline text-sm uppercase tracking-wider text-ink">
-                Courtside Readiness Hotlist
-              </h3>
-            </div>
-
-            <ul className="space-y-2 text-xs font-body text-ink/80">
-              <li className="flex items-center justify-between p-2 bg-ink/[0.02] border border-ink/10">
-                <span className="font-medium">EMT / Medical Station</span>
-                <span className="text-[10px] font-headline uppercase bg-green-100 text-green-800 px-1.5 py-0.5">
-                  Court 1 Standby
-                </span>
-              </li>
-              <li className="flex items-center justify-between p-2 bg-ink/[0.02] border border-ink/10">
-                <span className="font-medium">Scorer Table Clock Sync</span>
-                <span className="text-[10px] font-headline uppercase bg-green-100 text-green-800 px-1.5 py-0.5">
-                  Synchronized
-                </span>
-              </li>
-              <li className="flex items-center justify-between p-2 bg-ink/[0.02] border border-ink/10">
-                <span className="font-medium">Staff Radio Channel</span>
-                <span className="text-[10px] font-headline uppercase bg-ink/10 text-ink px-1.5 py-0.5 font-mono">
-                  CH-04 COURTSIDE
-                </span>
-              </li>
-            </ul>
-          </div>
         </div>
       </div>
     </div>

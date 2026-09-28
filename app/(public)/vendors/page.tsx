@@ -11,19 +11,15 @@ import {
   formatCurrency,
 } from "@/lib/vendors/data";
 import {
-  ShieldCheck,
-  Zap,
-  Users,
   Calendar,
   MapPin,
   ArrowRight,
-  Sparkles,
 } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Vendor Marketplace — GAMEDAY",
   description:
-    "Apply for curated vendor slots at GAMEDAY tournaments and events. Category exclusivity guaranteed — food trucks, apparel, and experiential brands.",
+    "Apply to sell at GAMEDAY tournaments. One vendor per food category per event. Free to apply.",
 };
 
 export default function VendorsPage() {
@@ -43,7 +39,7 @@ export default function VendorsPage() {
           </h1>
 
           <p className="mt-6 text-base sm:text-xl text-ivory/80 font-body max-w-2xl leading-relaxed">
-            Bring your food truck, coffee cart, or local brand to weekend tournaments in Austin. We take one vendor per food category per event, so you&apos;re never parked next to someone selling the same thing.
+            Bring your food truck, coffee cart, or local brand to our weekend tournaments. We take one vendor per food category per event, so you&apos;re never parked next to someone selling the same thing.
           </p>
 
           <div className="mt-8 sm:mt-10 flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
@@ -56,7 +52,7 @@ export default function VendorsPage() {
           </div>
 
           {/* Quick Metrics Strip */}
-          <div className="mt-16 sm:mt-20 pt-8 border-t border-ivory/15 grid grid-cols-2 sm:grid-cols-4 gap-6 sm:gap-8">
+          <div className="mt-16 sm:mt-20 pt-8 border-t border-ivory/15 grid grid-cols-2 sm:grid-cols-3 gap-6 sm:gap-8">
             <div>
               <span className="block text-3xl sm:text-4xl font-headline text-gold">1 per type</span>
               <span className="text-xs font-headline uppercase tracking-wider text-ivory/60 mt-1 block">
@@ -75,12 +71,6 @@ export default function VendorsPage() {
                 Hold Window If Selected
               </span>
             </div>
-            <div>
-              <span className="block text-3xl sm:text-4xl font-headline text-gold">10x10</span>
-              <span className="text-xs font-headline uppercase tracking-wider text-ivory/60 mt-1 block">
-                Pitch Space
-              </span>
-            </div>
           </div>
         </div>
       </section>
@@ -88,7 +78,7 @@ export default function VendorsPage() {
       {/* ────────────── HOW IT WORKS ────────────── */}
       <section className="py-20 md:py-28 px-4 sm:px-6 lg:px-12 max-w-stadium mx-auto border-b border-ink/15">
         <SectionHeader
-          subtitle="Simple 4-Step Pipeline"
+          subtitle="Four steps"
           title="HOW THE MARKETPLACE WORKS"
         />
 
@@ -101,7 +91,7 @@ export default function VendorsPage() {
               Apply Online
             </h3>
             <p className="text-sm text-ink/70 font-body leading-relaxed">
-              Submit your brand profile, signature products, and select one or more target tournament dates. No fee is required to apply.
+              Tell us what you sell and pick the tournament dates you want. It&apos;s free to apply.
             </p>
           </div>
 
@@ -110,10 +100,10 @@ export default function VendorsPage() {
               02
             </div>
             <h3 className="font-headline text-xl uppercase tracking-wider text-ink mb-2">
-              Curated Review
+              We Review It
             </h3>
             <p className="text-sm text-ink/70 font-body leading-relaxed">
-              Our event committee reviews submissions to ensure category fit, aesthetic alignment, and strict single-category exclusivity.
+              We check your application and make sure your category is still open for that date.
             </p>
           </div>
 
@@ -125,7 +115,7 @@ export default function VendorsPage() {
               Lock In & Pay
             </h3>
             <p className="text-sm text-ink/70 font-body leading-relaxed">
-              Approved vendors receive a private, single-use payment link valid for 48 hours to lock in their slot via secure Stripe checkout.
+              If you&apos;re approved, we email you a payment link. Pay within 48 hours to hold your slot.
             </p>
           </div>
 
@@ -134,10 +124,10 @@ export default function VendorsPage() {
               04
             </div>
             <h3 className="font-headline text-xl uppercase tracking-wider text-ink mb-2">
-              Load In & Sell
+              Show Up & Sell
             </h3>
             <p className="text-sm text-ink/70 font-body leading-relaxed">
-              Receive your load-in packet, designated booth spot, electrical access, and on-site staff support on tournament day.
+              We send you the arrival time and setup details for your event before game day.
             </p>
           </div>
         </div>
@@ -167,6 +157,12 @@ export default function VendorsPage() {
           viewAllHref="/events"
           viewAllText="ALL EVENTS"
         />
+
+        {vendorEvents.length === 0 && (
+          <p className="text-sm text-ink/70 font-body max-w-xl">
+            No dates are open to vendors yet. Check back once the schedule is posted.
+          </p>
+        )}
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {vendorEvents.map((evt) => {
@@ -262,81 +258,23 @@ export default function VendorsPage() {
         </div>
       </section>
 
-      {/* ────────────── VENDOR BENEFITS ────────────── */}
-      <section className="py-20 md:py-28 px-4 sm:px-6 lg:px-12 max-w-stadium mx-auto">
-        <SectionHeader
-          subtitle="The GAMEDAY Advantage"
-          title="WHY PARTNER WITH US"
-        />
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          <div className="border-2 border-ink/15 p-6 bg-white">
-            <div className="w-10 h-10 bg-gold/15 flex items-center justify-center mb-4">
-              <ShieldCheck className="w-5 h-5 text-ink" />
-            </div>
-            <h4 className="font-headline text-lg uppercase tracking-wider text-ink mb-2">
-              Category Exclusivity
-            </h4>
-            <p className="text-xs text-ink/70 font-body leading-relaxed">
-              We never double-book subcategories. If you sell smash burgers, you are the only burger vendor on the court concourse.
-            </p>
-          </div>
-
-          <div className="border-2 border-ink/15 p-6 bg-white">
-            <div className="w-10 h-10 bg-gold/15 flex items-center justify-center mb-4">
-              <Users className="w-5 h-5 text-ink" />
-            </div>
-            <h4 className="font-headline text-lg uppercase tracking-wider text-ink mb-2">
-              Concentrated Footprint
-            </h4>
-            <p className="text-xs text-ink/70 font-body leading-relaxed">
-              Our tournaments are intense 4-to-8 hour high-traffic events where athletes and crowds remain on-site throughout the day.
-            </p>
-          </div>
-
-          <div className="border-2 border-ink/15 p-6 bg-white">
-            <div className="w-10 h-10 bg-gold/15 flex items-center justify-center mb-4">
-              <Sparkles className="w-5 h-5 text-ink" />
-            </div>
-            <h4 className="font-headline text-lg uppercase tracking-wider text-ink mb-2">
-              Digital Spotlight
-            </h4>
-            <p className="text-xs text-ink/70 font-body leading-relaxed">
-              Every confirmed vendor is featured on our official event guide, tournament program, and social story shoutouts leading up to the game.
-            </p>
-          </div>
-
-          <div className="border-2 border-ink/15 p-6 bg-white">
-            <div className="w-10 h-10 bg-gold/15 flex items-center justify-center mb-4">
-              <Zap className="w-5 h-5 text-ink" />
-            </div>
-            <h4 className="font-headline text-lg uppercase tracking-wider text-ink mb-2">
-              Zero Friction Setup
-            </h4>
-            <p className="text-xs text-ink/70 font-body leading-relaxed">
-              Dedicated load-in managers, clear vehicle arrival windows, waste disposal management, and reliable electrical distribution.
-            </p>
-          </div>
-        </div>
-      </section>
-
       {/* ────────────── BOTTOM CALL TO ACTION ────────────── */}
       <section className="bg-ink text-ivory py-16 sm:py-20 px-4 sm:px-6 lg:px-12">
         <div className="max-w-stadium mx-auto flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
           <div>
             <span className="text-xs font-headline uppercase tracking-widest text-gold block mb-2">
-              Spring 2026 Slots Open
+              Vendor applications
             </span>
             <h2 className="text-3xl sm:text-5xl font-headline uppercase tracking-tight text-ivory">
               READY TO BRING YOUR BRAND COURTSIDE?
             </h2>
             <p className="text-sm text-ivory/70 font-body max-w-xl mt-2">
-              Applications are reviewed on a rolling basis. Due to exclusivity rules, slots fill rapidly.
+              We review applications as they come in. One vendor per food category per event.
             </p>
           </div>
 
           <Button asChild variant="primary" size="lg" className="flex-shrink-0">
-            <Link href="/vendors/apply">Apply Now — Free Submission</Link>
+            <Link href="/vendors/apply">Apply Now — Free</Link>
           </Button>
         </div>
       </section>

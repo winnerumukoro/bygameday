@@ -1,15 +1,32 @@
 import type { Metadata } from "next";
 import { getFinancialReport } from "@/lib/admin/data";
+import type { FinancialReport } from "@/lib/admin/data";
 import { formatCurrency } from "@/lib/vendors/data";
 import { FinancialTransactionsTable } from "@/components/admin/financial-transactions-table";
-import { ShieldCheck, CreditCard } from "lucide-react";
+import { AlertTriangle, CreditCard } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Financials & Stripe — GAMEDAY Console",
 };
 
+const STREAMS = [
+  { label: "Tickets", barClass: "bg-ink", amountOf: (r: FinancialReport) => r.ticketSalesCents },
+  { label: "Team Fees", barClass: "bg-gold", amountOf: (r: FinancialReport) => r.teamFeesCents },
+  { label: "Vendor Permits", barClass: "bg-amber-600", amountOf: (r: FinancialReport) => r.vendorFeesCents },
+  { label: "Sponsorships", barClass: "bg-emerald-700", amountOf: (r: FinancialReport) => r.sponsorshipCents },
+];
+
 export default function AdminFinancialsPage() {
   const report = getFinancialReport();
+
+  /*
+   * Shares are derived from the totals. They were previously typed in by hand
+   * (38.1 / 35.0 / 13.6 / 13.3) and stayed put no matter what the figures said.
+   */
+  const share = (cents: number) =>
+    report.totalGrossCents === 0
+      ? "0.0"
+      : ((cents / report.totalGrossCents) * 100).toFixed(1);
 
   return (
     <div className="space-y-8">
@@ -23,9 +40,9 @@ export default function AdminFinancialsPage() {
           </h1>
         </div>
 
-        <div className="flex items-center gap-2 text-xs font-body text-ink/60 bg-white border border-ink/15 px-3 py-1.5">
-          <ShieldCheck className="w-4 h-4 text-green-600" />
-          <span>Stripe Connect Gateway Active</span>
+        <div className="flex items-center gap-2 text-xs font-body text-amber-900 bg-amber-50 border border-amber-300 px-3 py-1.5">
+          <AlertTriangle className="w-4 h-4 shrink-0" />
+          <span>Not connected — no payment provider configured</span>
         </div>
       </div>
 
@@ -40,7 +57,7 @@ export default function AdminFinancialsPage() {
             {formatCurrency(report.ticketSalesCents)}
           </span>
           <span className="text-[11px] text-ink/60 font-body block mt-1">
-            38.1% of Gross Revenue
+            {share(report.ticketSalesCents)}% of gross revenue
           </span>
         </div>
 
@@ -53,7 +70,7 @@ export default function AdminFinancialsPage() {
             {formatCurrency(report.teamFeesCents)}
           </span>
           <span className="text-[11px] text-ink/60 font-body block mt-1">
-            35.0% of Gross Revenue
+            {share(report.teamFeesCents)}% of gross revenue
           </span>
         </div>
 
@@ -66,7 +83,7 @@ export default function AdminFinancialsPage() {
             {formatCurrency(report.vendorFeesCents)}
           </span>
           <span className="text-[11px] text-ink/60 font-body block mt-1">
-            13.6% of Gross Revenue
+            {share(report.vendorFeesCents)}% of gross revenue
           </span>
         </div>
 
@@ -79,7 +96,7 @@ export default function AdminFinancialsPage() {
             {formatCurrency(report.sponsorshipCents)}
           </span>
           <span className="text-[11px] text-ink/60 font-body block mt-1">
-            13.3% of Gross Revenue
+            {share(report.sponsorshipCents)}% of gross revenue
           </span>
         </div>
       </div>
@@ -95,31 +112,35 @@ export default function AdminFinancialsPage() {
           </span>
         </div>
 
-        <div className="w-full h-4 bg-ink/10 flex overflow-hidden">
-          <div className="h-full bg-ink" style={{ width: "38.1%" }} title="Tickets (38.1%)" />
-          <div className="h-full bg-gold" style={{ width: "35.0%" }} title="Team Fees (35.0%)" />
-          <div className="h-full bg-amber-600" style={{ width: "13.6%" }} title="Vendors (13.6%)" />
-          <div className="h-full bg-emerald-700" style={{ width: "13.3%" }} title="Sponsors (13.3%)" />
-        </div>
+        {report.totalGrossCents === 0 ? (
+          <p className="text-xs text-ink/50 font-body py-4 text-center border border-dashed border-ink/15">
+            Nothing settled yet — the split appears once payments run through.
+          </p>
+        ) : (
+          <>
+            <div className="w-full h-4 bg-ink/10 flex overflow-hidden">
+              {STREAMS.map((stream) => (
+                <div
+                  key={stream.label}
+                  className={`h-full ${stream.barClass}`}
+                  style={{ width: `${share(stream.amountOf(report))}%` }}
+                  title={`${stream.label} (${share(stream.amountOf(report))}%)`}
+                />
+              ))}
+            </div>
 
-        <div className="flex flex-wrap items-center gap-4 text-[11px] text-ink/70 font-body pt-1">
-          <div className="flex items-center gap-1.5">
-            <span className="w-2.5 h-2.5 bg-ink inline-block" />
-            <span>Tickets (38.1%)</span>
-          </div>
-          <div className="flex items-center gap-1.5">
-            <span className="w-2.5 h-2.5 bg-gold inline-block" />
-            <span>Team Fees (35.0%)</span>
-          </div>
-          <div className="flex items-center gap-1.5">
-            <span className="w-2.5 h-2.5 bg-amber-600 inline-block" />
-            <span>Vendor Permits (13.6%)</span>
-          </div>
-          <div className="flex items-center gap-1.5">
-            <span className="w-2.5 h-2.5 bg-emerald-700 inline-block" />
-            <span>Sponsorships (13.3%)</span>
-          </div>
-        </div>
+            <div className="flex flex-wrap items-center gap-4 text-[11px] text-ink/70 font-body pt-1">
+              {STREAMS.map((stream) => (
+                <div key={stream.label} className="flex items-center gap-1.5">
+                  <span className={`w-2.5 h-2.5 inline-block ${stream.barClass}`} />
+                  <span>
+                    {stream.label} ({share(stream.amountOf(report))}%)
+                  </span>
+                </div>
+              ))}
+            </div>
+          </>
+        )}
       </div>
 
       {/* ────────────── STRIPE TRANSACTIONS LEDGER ────────────── */}
@@ -131,7 +152,6 @@ export default function AdminFinancialsPage() {
               Recent Stripe Transactions & Refunds
             </h3>
           </div>
-          <span className="text-xs text-ink/50 font-body">Live Payout Status</span>
         </div>
 
         <FinancialTransactionsTable initialTransactions={report.recentTransactions} />

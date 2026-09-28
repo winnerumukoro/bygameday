@@ -97,7 +97,7 @@ export function AthleticWaiverInline({
               type="text"
               value={signerName}
               onChange={(e) => onSignerNameChange(e.target.value)}
-              placeholder="e.g. Jordan Williams"
+              placeholder="Full name"
               className={cn(
                 "w-full px-3 py-2.5 border-2 bg-white text-sm font-body text-ink focus:outline-none focus:border-gold",
                 errors?.signerName ? "border-red-500" : "border-ink/15"
@@ -122,7 +122,7 @@ export function AthleticWaiverInline({
               type="email"
               value={signerEmail}
               onChange={(e) => onSignerEmailChange(e.target.value)}
-              placeholder="jordan@domain.com"
+              placeholder="name@email.com"
               className={cn(
                 "w-full px-3 py-2.5 border-2 bg-white text-sm font-body text-ink focus:outline-none focus:border-gold",
                 errors?.signerEmail ? "border-red-500" : "border-ink/15"

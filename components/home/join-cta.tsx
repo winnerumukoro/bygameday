@@ -32,8 +32,8 @@ export function JoinCta() {
 
         <Reveal variant="up" delay={200}>
           <p className="text-sm sm:text-base text-ivory/70 font-body max-w-xl leading-relaxed">
-            Registration opens a few weeks before each tournament and the popular divisions fill in a
-            day or two. Give us your email and we&apos;ll tell you when it goes live.
+            Registration opens a few weeks before each tournament.
+            Give us your email and we&apos;ll tell you when it goes live.
           </p>
         </Reveal>
 

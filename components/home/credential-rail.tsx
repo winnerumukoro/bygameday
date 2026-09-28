@@ -8,7 +8,6 @@ const WORDS = [
   "PICKLEBALL",
   "1V1",
   "FOOD VENDORS",
-  "AUSTIN, TX",
 ];
 
 /**

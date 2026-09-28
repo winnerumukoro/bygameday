@@ -85,47 +85,8 @@ export const VENDOR_SUBCATEGORIES: VendorSubcategory[] = [
 ];
 
 /** Capacity configs matching seed.sql — expanded across more events */
-export const EVENT_VENDOR_CAPACITY: EventVendorCapacity[] = [
-  // Interhouse Basketball — 5 subcategory slots
-  { id: "cap-001", eventId: "b0000000-0000-0000-0000-000000000001", subcategoryId: "c1000000-0000-0000-0000-000000000001", maxSlots: 1, feeCents: 35000 },
-  { id: "cap-002", eventId: "b0000000-0000-0000-0000-000000000001", subcategoryId: "c1000000-0000-0000-0000-000000000002", maxSlots: 1, feeCents: 35000 },
-  { id: "cap-003", eventId: "b0000000-0000-0000-0000-000000000001", subcategoryId: "c1000000-0000-0000-0000-000000000003", maxSlots: 1, feeCents: 35000 },
-  { id: "cap-004", eventId: "b0000000-0000-0000-0000-000000000001", subcategoryId: "c1000000-0000-0000-0000-000000000004", maxSlots: 1, feeCents: 25000 },
-  { id: "cap-005", eventId: "b0000000-0000-0000-0000-000000000001", subcategoryId: "c1000000-0000-0000-0000-000000000007", maxSlots: 2, feeCents: 25000 },
-  // Spring Viewing Party — 4 subcategory slots
-  { id: "cap-006", eventId: "b0000000-0000-0000-0000-000000000003", subcategoryId: "c1000000-0000-0000-0000-000000000001", maxSlots: 2, feeCents: 30000 },
-  { id: "cap-007", eventId: "b0000000-0000-0000-0000-000000000003", subcategoryId: "c1000000-0000-0000-0000-000000000005", maxSlots: 2, feeCents: 25000 },
-  { id: "cap-008", eventId: "b0000000-0000-0000-0000-000000000003", subcategoryId: "c1000000-0000-0000-0000-000000000009", maxSlots: 1, feeCents: 20000 },
-  { id: "cap-009", eventId: "b0000000-0000-0000-0000-000000000003", subcategoryId: "c1000000-0000-0000-0000-000000000010", maxSlots: 1, feeCents: 20000 },
-  // Volleyball Classic — 3 subcategory slots
-  { id: "cap-010", eventId: "b0000000-0000-0000-0000-000000000004", subcategoryId: "c1000000-0000-0000-0000-000000000003", maxSlots: 1, feeCents: 30000 },
-  { id: "cap-011", eventId: "b0000000-0000-0000-0000-000000000004", subcategoryId: "c1000000-0000-0000-0000-000000000005", maxSlots: 1, feeCents: 25000 },
-  { id: "cap-012", eventId: "b0000000-0000-0000-0000-000000000004", subcategoryId: "c1000000-0000-0000-0000-000000000007", maxSlots: 1, feeCents: 25000 },
-  // Pickleball Open — 3 subcategory slots
-  { id: "cap-013", eventId: "b0000000-0000-0000-0000-000000000005", subcategoryId: "c1000000-0000-0000-0000-000000000004", maxSlots: 1, feeCents: 25000 },
-  { id: "cap-014", eventId: "b0000000-0000-0000-0000-000000000005", subcategoryId: "c1000000-0000-0000-0000-000000000005", maxSlots: 1, feeCents: 25000 },
-  { id: "cap-015", eventId: "b0000000-0000-0000-0000-000000000005", subcategoryId: "c1000000-0000-0000-0000-000000000008", maxSlots: 1, feeCents: 20000 },
-  // Flag Football Bowl — 4 slots
-  { id: "cap-016", eventId: "b0000000-0000-0000-0000-000000000006", subcategoryId: "c1000000-0000-0000-0000-000000000002", maxSlots: 1, feeCents: 30000 },
-  { id: "cap-017", eventId: "b0000000-0000-0000-0000-000000000006", subcategoryId: "c1000000-0000-0000-0000-000000000003", maxSlots: 1, feeCents: 30000 },
-  { id: "cap-018", eventId: "b0000000-0000-0000-0000-000000000006", subcategoryId: "c1000000-0000-0000-0000-000000000007", maxSlots: 2, feeCents: 25000 },
-  { id: "cap-019", eventId: "b0000000-0000-0000-0000-000000000006", subcategoryId: "c1000000-0000-0000-0000-000000000011", maxSlots: 1, feeCents: 15000 },
-  // 5K & Street Festival — 5 slots
-  { id: "cap-020", eventId: "b0000000-0000-0000-0000-000000000007", subcategoryId: "c1000000-0000-0000-0000-000000000001", maxSlots: 2, feeCents: 30000 },
-  { id: "cap-021", eventId: "b0000000-0000-0000-0000-000000000007", subcategoryId: "c1000000-0000-0000-0000-000000000004", maxSlots: 2, feeCents: 25000 },
-  { id: "cap-022", eventId: "b0000000-0000-0000-0000-000000000007", subcategoryId: "c1000000-0000-0000-0000-000000000006", maxSlots: 1, feeCents: 25000 },
-  { id: "cap-023", eventId: "b0000000-0000-0000-0000-000000000007", subcategoryId: "c1000000-0000-0000-0000-000000000009", maxSlots: 1, feeCents: 20000 },
-  { id: "cap-024", eventId: "b0000000-0000-0000-0000-000000000007", subcategoryId: "c1000000-0000-0000-0000-000000000010", maxSlots: 1, feeCents: 15000 },
-  // Queens Futsal Derby — 3 slots
-  { id: "cap-025", eventId: "b0000000-0000-0000-0000-000000000008", subcategoryId: "c1000000-0000-0000-0000-000000000001", maxSlots: 1, feeCents: 30000 },
-  { id: "cap-026", eventId: "b0000000-0000-0000-0000-000000000008", subcategoryId: "c1000000-0000-0000-0000-000000000003", maxSlots: 1, feeCents: 30000 },
-  { id: "cap-027", eventId: "b0000000-0000-0000-0000-000000000008", subcategoryId: "c1000000-0000-0000-0000-000000000007", maxSlots: 1, feeCents: 25000 },
-  // NBA Finals Viewing — 4 slots
-  { id: "cap-028", eventId: "b0000000-0000-0000-0000-000000000009", subcategoryId: "c1000000-0000-0000-0000-000000000002", maxSlots: 1, feeCents: 35000 },
-  { id: "cap-029", eventId: "b0000000-0000-0000-0000-000000000009", subcategoryId: "c1000000-0000-0000-0000-000000000003", maxSlots: 2, feeCents: 35000 },
-  { id: "cap-030", eventId: "b0000000-0000-0000-0000-000000000009", subcategoryId: "c1000000-0000-0000-0000-000000000005", maxSlots: 2, feeCents: 25000 },
-  { id: "cap-031", eventId: "b0000000-0000-0000-0000-000000000009", subcategoryId: "c1000000-0000-0000-0000-000000000010", maxSlots: 1, feeCents: 20000 },
-];
+// Slot counts and permit fees are set per real event; none are published yet.
+export const EVENT_VENDOR_CAPACITY: EventVendorCapacity[] = [];
 
 /**
  * In-memory slot tracking — simulates the `vendor_event_slots` table.

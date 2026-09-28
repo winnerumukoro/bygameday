@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og";
 
 export const runtime = "edge";
-export const alt = "GAMEDAY — The Community Sports & Tournament Platform";
+export const alt = "GAMEDAY — Sports tournaments with local food vendors";
 export const size = {
   width: 1200,
   height: 630,
@@ -99,8 +99,8 @@ export default function OpenGraphImage() {
               flexDirection: "column",
             }}
           >
-            <span>COMPETE. CONNECT.</span>
-            <span style={{ color: "#C89A2B" }}>CELEBRATE.</span>
+            <span>SPORTS</span>
+            <span style={{ color: "#C89A2B" }}>TOURNAMENTS</span>
           </div>
 
           <div
@@ -111,7 +111,7 @@ export default function OpenGraphImage() {
               lineHeight: 1.4,
             }}
           >
-            The premier community sports, intramural tournament, and curated vendor operations platform.
+            Weekend brackets in basketball, volleyball, soccer, flag football and pickleball, with local food vendors on site.
           </div>
         </div>
 
@@ -125,25 +125,22 @@ export default function OpenGraphImage() {
             paddingTop: "24px",
           }}
         >
-          <div style={{ display: "flex", gap: "40px" }}>
-            <div style={{ display: "flex", flexDirection: "column" }}>
-              <span style={{ fontSize: "28px", fontWeight: 900, color: "#F5F4EB" }}>24</span>
-              <span style={{ fontSize: "11px", color: "rgba(245, 244, 235, 0.5)", textTransform: "uppercase" }}>
-                Tournaments
-              </span>
-            </div>
-            <div style={{ display: "flex", flexDirection: "column" }}>
-              <span style={{ fontSize: "28px", fontWeight: 900, color: "#C89A2B" }}>1,840+</span>
-              <span style={{ fontSize: "11px", color: "rgba(245, 244, 235, 0.5)", textTransform: "uppercase" }}>
-                Athletes
-              </span>
-            </div>
-            <div style={{ display: "flex", flexDirection: "column" }}>
-              <span style={{ fontSize: "28px", fontWeight: 900, color: "#F5F4EB" }}>60+</span>
-              <span style={{ fontSize: "11px", color: "rgba(245, 244, 235, 0.5)", textTransform: "uppercase" }}>
-                Curated Vendors
-              </span>
-            </div>
+          <div
+            style={{
+              display: "flex",
+              gap: "28px",
+              fontSize: "15px",
+              fontWeight: 800,
+              letterSpacing: "0.12em",
+              textTransform: "uppercase",
+              color: "rgba(245, 244, 235, 0.7)",
+            }}
+          >
+            <span>Basketball</span>
+            <span>Volleyball</span>
+            <span>Soccer</span>
+            <span>Flag Football</span>
+            <span>Pickleball</span>
           </div>
 
           <div
@@ -158,7 +155,7 @@ export default function OpenGraphImage() {
               color: "#C89A2B",
             }}
           >
-            <span>LIVE OPERATIONAL ENGINE</span>
+            <span>ENTER A BRACKET</span>
             <span>→</span>
           </div>
         </div>

@@ -118,7 +118,7 @@ export function WaiverInline({
               type="text"
               value={signerName}
               onChange={(e) => onSignerNameChange(e.target.value)}
-              placeholder="e.g. Jordan Williams"
+              placeholder="Full name"
               className={cn(
                 "w-full px-3 py-2.5 border-2 bg-white text-sm font-body text-ink focus:outline-none focus:ring-2 focus:ring-gold/30 focus:border-gold transition-colors",
                 errors?.signerName ? "border-red-500" : "border-ink/15"
@@ -143,7 +143,7 @@ export function WaiverInline({
               type="email"
               value={signerEmail}
               onChange={(e) => onSignerEmailChange(e.target.value)}
-              placeholder="jordan@yourbrand.com"
+              placeholder="name@business.com"
               className={cn(
                 "w-full px-3 py-2.5 border-2 bg-white text-sm font-body text-ink focus:outline-none focus:ring-2 focus:ring-gold/30 focus:border-gold transition-colors",
                 errors?.signerEmail ? "border-red-500" : "border-ink/15"

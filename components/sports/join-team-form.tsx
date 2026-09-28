@@ -118,7 +118,7 @@ export function JoinTeamForm({ team, division }: JoinTeamFormProps) {
               </label>
               <input
                 {...register("playerName")}
-                placeholder="e.g. Tariq Owens"
+                placeholder="Full name"
                 className="w-full px-3.5 py-2.5 border-2 border-ink/15 bg-white text-sm font-body text-ink focus:outline-none focus:border-gold"
               />
               {errors.playerName && (
@@ -133,7 +133,7 @@ export function JoinTeamForm({ team, division }: JoinTeamFormProps) {
               <input
                 {...register("playerEmail")}
                 type="email"
-                placeholder="tariq@email.com"
+                placeholder="name@email.com"
                 className="w-full px-3.5 py-2.5 border-2 border-ink/15 bg-white text-sm font-body text-ink focus:outline-none focus:border-gold"
               />
               {errors.playerEmail && (

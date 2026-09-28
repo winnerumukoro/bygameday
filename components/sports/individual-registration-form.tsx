@@ -200,7 +200,7 @@ export function IndividualRegistrationForm({
               </label>
               <input
                 {...register("name")}
-                placeholder="e.g. Kyrie Mitchell"
+                placeholder="Full name"
                 className="w-full px-3.5 py-2.5 border-2 border-ink/15 bg-white text-sm font-body text-ink focus:outline-none focus:border-gold"
               />
               {errors.name && (
@@ -215,7 +215,7 @@ export function IndividualRegistrationForm({
               <input
                 {...register("email")}
                 type="email"
-                placeholder="kyrie@email.com"
+                placeholder="name@email.com"
                 className="w-full px-3.5 py-2.5 border-2 border-ink/15 bg-white text-sm font-body text-ink focus:outline-none focus:border-gold"
               />
               {errors.email && (
@@ -270,7 +270,7 @@ export function IndividualRegistrationForm({
               </label>
               <input
                 {...register("emergencyContactName")}
-                placeholder="e.g. Sarah Mitchell"
+                placeholder="Full name"
                 className="w-full px-3.5 py-2.5 border-2 border-ink/15 bg-white text-sm font-body text-ink focus:outline-none focus:border-gold"
               />
               {errors.emergencyContactName && (

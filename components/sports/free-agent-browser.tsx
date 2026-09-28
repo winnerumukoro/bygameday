@@ -174,6 +174,15 @@ export function FreeAgentBrowser({
             ))}
           </div>
 
+          {filteredAgents.length === 0 && (
+            <div className="border border-dashed border-ink/20 py-14 px-6 text-center">
+              <p className="font-headline uppercase text-lg text-ink">Nobody in the pool yet</p>
+              <p className="text-sm text-ink/60 font-body mt-2 max-w-md mx-auto">
+                Be the first to sign up. Captains check this list when they need to fill a roster.
+              </p>
+            </div>
+          )}
+
           {/* Cards Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {filteredAgents.map((agent) => (
@@ -269,7 +278,7 @@ export function FreeAgentBrowser({
                 </label>
                 <input
                   {...register("name")}
-                  placeholder="e.g. Cameron Wright"
+                  placeholder="Full name"
                   className="w-full px-3.5 py-2.5 border-2 border-ink/15 bg-white text-sm font-body text-ink focus:outline-none focus:border-gold"
                 />
                 {errors.name && (
@@ -284,7 +293,7 @@ export function FreeAgentBrowser({
                 <input
                   {...register("email")}
                   type="email"
-                  placeholder="cameron@email.com"
+                  placeholder="name@email.com"
                   className="w-full px-3.5 py-2.5 border-2 border-ink/15 bg-white text-sm font-body text-ink focus:outline-none focus:border-gold"
                 />
                 {errors.email && (

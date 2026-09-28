@@ -240,7 +240,7 @@ export function TeamRegistrationForm({
               </label>
               <input
                 {...register("teamName")}
-                placeholder="e.g. Uptown Monstars, Brooklyn Flight Squad"
+                placeholder="Your team name"
                 className="w-full px-3.5 py-2.5 border-2 border-ink/15 bg-white text-sm font-body text-ink focus:outline-none focus:border-gold"
               />
               {errors.teamName && (
@@ -255,7 +255,7 @@ export function TeamRegistrationForm({
                 </label>
                 <input
                   {...register("captainName")}
-                  placeholder="e.g. Marcus Vance"
+                  placeholder="Full name"
                   className="w-full px-3.5 py-2.5 border-2 border-ink/15 bg-white text-sm font-body text-ink focus:outline-none focus:border-gold"
                 />
                 {errors.captainName && (
@@ -270,7 +270,7 @@ export function TeamRegistrationForm({
                 <input
                   {...register("captainEmail")}
                   type="email"
-                  placeholder="marcus@email.com"
+                  placeholder="name@email.com"
                   className="w-full px-3.5 py-2.5 border-2 border-ink/15 bg-white text-sm font-body text-ink focus:outline-none focus:border-gold"
                 />
                 {errors.captainEmail && (

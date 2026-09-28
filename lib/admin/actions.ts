@@ -7,6 +7,7 @@ import {
   type VendorPipelineStatus,
 } from "./data";
 import { SEED_BRACKET } from "@/lib/sports/data";
+import { isAdmin } from "@/lib/auth/session";
 
 export interface AdminActionResult {
   success: boolean;
@@ -22,6 +23,7 @@ export async function updateVendorStatus(
   status: VendorPipelineStatus,
   reason?: string
 ): Promise<AdminActionResult> {
+  if (!(await isAdmin())) return { success: false, error: "Not authorized." };
   const success = updateVendorApplication(id, status, reason);
   if (!success) {
     return { success: false, error: "Application record not found." };
@@ -51,6 +53,7 @@ export async function updateMatchScore(
   status: "in_progress" | "completed",
   winnerId?: string
 ): Promise<AdminActionResult> {
+  if (!(await isAdmin())) return { success: false, error: "Not authorized." };
   // Find match in seed bracket
   const match = SEED_BRACKET.matches.find((m) => m.id === matchId);
   if (match) {
@@ -77,6 +80,7 @@ export async function toggleEventPublishStatus(
   eventId: string,
   isPublished: boolean
 ): Promise<AdminActionResult> {
+  if (!(await isAdmin())) return { success: false, error: "Not authorized." };
   // In production: UPDATE events SET status = isPublished ? 'published' : 'draft' WHERE id = eventId
   void eventId;
   return {
@@ -92,6 +96,7 @@ export async function dispatchBroadcastAlert(
   message: string,
   severity: "info" | "warning" | "emergency" = "warning"
 ): Promise<AdminActionResult> {
+  if (!(await isAdmin())) return { success: false, error: "Not authorized." };
   if (!message || message.trim().length === 0) {
     return { success: false, error: "Message cannot be empty." };
   }
@@ -111,6 +116,7 @@ export async function issueTransactionRefund(
   transactionId: string,
   reason: string = "Requested by tournament staff"
 ): Promise<AdminActionResult> {
+  if (!(await isAdmin())) return { success: false, error: "Not authorized." };
   const success = recordRefund(transactionId);
   if (!success) {
     return { success: false, error: "Transaction not found." };

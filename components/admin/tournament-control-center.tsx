@@ -4,6 +4,7 @@ import { useState } from "react";
 import type { Bracket, Match } from "@/lib/sports/data";
 import { LiveScoreModal } from "./live-score-modal";
 import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 import {
   Trophy,
   Radio,
@@ -62,13 +63,19 @@ export function TournamentControlCenter({
       <div>
         <div className="flex items-center justify-between pb-3 mb-4 border-b border-ink/10">
           <div className="flex items-center gap-2">
-            <Radio className="w-4 h-4 text-red-600 animate-pulse" />
+            <Radio className={cn("w-4 h-4", liveMatches.length > 0 ? "text-red-600 animate-pulse" : "text-ink/30")} />
             <h3 className="font-headline text-sm uppercase tracking-wider text-ink">
               Live Courtside Action ({liveMatches.length} Underway)
             </h3>
           </div>
-          <span className="text-xs text-ink/50 font-body">Rucker Park Active Courts</span>
+          <span className="text-xs text-ink/50 font-body">No courts configured</span>
         </div>
+
+        {liveMatches.length === 0 && (
+          <p className="text-xs font-body text-ink/50 py-6">
+            No matches are in progress.
+          </p>
+        )}
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {liveMatches.map((match) => (
@@ -225,6 +232,13 @@ export function TournamentControlCenter({
                   </tr>
                 );
               })}
+              {bracket.matches.length === 0 && (
+                <tr>
+                  <td colSpan={7} className="py-10 px-4 text-center text-xs font-body text-ink/50">
+                    No matches yet. A bracket appears here once a division fills.
+                  </td>
+                </tr>
+              )}
             </tbody>
           </table>
         </div>

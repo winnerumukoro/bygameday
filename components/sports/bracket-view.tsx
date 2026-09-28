@@ -57,6 +57,18 @@ export function BracketView({ bracket }: BracketViewProps) {
         </div>
       </div>
 
+      {bracket.matches.length === 0 && (
+        <div className="border-2 border-dashed border-ink/20 bg-white p-10 text-center">
+          <h3 className="font-headline text-xl uppercase tracking-tight text-ink">
+            Draw Not Posted Yet
+          </h3>
+          <p className="text-sm text-ink/60 font-body max-w-md mx-auto mt-2">
+            Seeding happens once registration closes and the field is set. Check back, or
+            register while spots are open.
+          </p>
+        </div>
+      )}
+
       {/* Mobile Round Switcher (<md) */}
       <div className="md:hidden mb-6 flex overflow-x-auto gap-2 pb-2">
         {roundNumbers.map((rNum) => {

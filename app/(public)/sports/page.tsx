@@ -29,11 +29,11 @@ export default function SportsPage() {
 
         <div className="relative max-w-stadium mx-auto">
           <h1 className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-headline uppercase tracking-tight leading-tighter text-ivory max-w-5xl">
-            AUSTIN <span className="text-gold">TOURNAMENTS</span>
+            SPORTS <span className="text-gold">TOURNAMENTS</span>
           </h1>
 
           <p className="mt-6 text-base sm:text-xl text-ivory/80 font-body max-w-2xl leading-relaxed">
-            Weekend brackets across Austin on hardwood, sand, turf, and asphalt. Enter with your squad, take on 1v1 duels, or register solo and we&apos;ll place you on a roster.
+            Weekend brackets on hardwood, sand, turf, and asphalt. Enter with your squad, take on 1v1 duels, or register solo and we&apos;ll place you on a roster.
           </p>
 
           <div className="mt-8 sm:mt-10 flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
@@ -51,10 +51,16 @@ export default function SportsPage() {
             </Button>
           </div>
 
-          {/* Metrics Strip */}
-          <div className="mt-16 sm:mt-20 pt-8 border-t border-ivory/15 grid grid-cols-2 sm:grid-cols-4 gap-6 sm:gap-8">
+          {/*
+            Two counts of what is on offer. The "Official / Refereed" and
+            "Live / Updated Brackets" tiles that sat beside them were promises
+            dressed up as figures, so they are gone.
+          */}
+          <div className="mt-16 sm:mt-20 pt-8 border-t border-ivory/15 grid grid-cols-2 gap-6 sm:gap-8 max-w-md">
             <div>
-              <span className="block text-3xl sm:text-4xl font-headline text-gold">5</span>
+              <span className="block text-3xl sm:text-4xl font-headline text-gold">
+                {sports.length}
+              </span>
               <span className="text-xs font-headline uppercase tracking-wider text-ivory/60 mt-1 block">
                 Sports
               </span>
@@ -62,19 +68,7 @@ export default function SportsPage() {
             <div>
               <span className="block text-3xl sm:text-4xl font-headline text-gold">2</span>
               <span className="text-xs font-headline uppercase tracking-wider text-ivory/60 mt-1 block">
-                Formats (Teams & 1v1)
-              </span>
-            </div>
-            <div>
-              <span className="block text-3xl sm:text-4xl font-headline text-gold">Official</span>
-              <span className="text-xs font-headline uppercase tracking-wider text-ivory/60 mt-1 block">
-                Refereed Games
-              </span>
-            </div>
-            <div>
-              <span className="block text-3xl sm:text-4xl font-headline text-gold">Live</span>
-              <span className="text-xs font-headline uppercase tracking-wider text-ivory/60 mt-1 block">
-                Updated Brackets
+                Formats (Teams &amp; 1v1)
               </span>
             </div>
           </div>
@@ -84,8 +78,8 @@ export default function SportsPage() {
       {/* ────────────── DIVISIONS & SPORTS BROWSER ────────────── */}
       <section className="py-20 md:py-28 px-4 sm:px-6 lg:px-12 max-w-stadium mx-auto border-b border-ink/15">
         <SectionHeader
-          subtitle="Spring & Summer 2026"
-          title="ACTIVE TOURNAMENT DIVISIONS"
+          subtitle="Play with us"
+          title="TOURNAMENT DIVISIONS"
         />
 
         <SportsHubBrowser sports={sports} divisions={divisions} />
