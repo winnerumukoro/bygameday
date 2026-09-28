@@ -15,17 +15,19 @@ export function Logo({
   href = "/",
   priority = true,
 }: LogoProps) {
-  const src = variant === "light" ? "/brand/logo-light.svg" : "/brand/logo-dark.svg";
+  // Raster lockups: the brand-kit SVGs set the wordmark as live text in a
+  // font visitors don't have, so they render in a fallback face.
+  const src = variant === "light" ? "/brand/logo-web-light.png" : "/brand/logo-web-dark.png";
 
   const content = (
     <div className={cn("relative inline-flex items-center", className)}>
       <Image
         src={src}
         alt="GAMEDAY"
-        width={180}
-        height={30}
+        width={2274}
+        height={240}
         priority={priority}
-        className="h-7 w-auto object-contain transition-opacity duration-200"
+        className="h-5 sm:h-6 w-auto object-contain transition-opacity duration-200"
       />
     </div>
   );

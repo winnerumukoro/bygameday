@@ -43,7 +43,12 @@ export const metadata: Metadata = {
     creator: "@bygameday",
   },
   icons: {
-    icon: "/brand/logo-dark.svg",
+    icon: [
+      { url: "/brand/favicon.ico", sizes: "any" },
+      { url: "/brand/favicon-32.png", type: "image/png", sizes: "32x32" },
+      { url: "/brand/favicon-16.png", type: "image/png", sizes: "16x16" },
+    ],
+    apple: { url: "/brand/apple-touch-icon.png", sizes: "180x180" },
   },
 };
 

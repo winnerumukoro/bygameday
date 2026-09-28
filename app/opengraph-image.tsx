@@ -8,7 +8,11 @@ export const size = {
 };
 export const contentType = "image/png";
 
-export default function OpenGraphImage() {
+export default async function OpenGraphImage() {
+  const logo = await fetch(new URL("../public/brand/logo-web-light.png", import.meta.url)).then((res) =>
+    res.arrayBuffer()
+  );
+
   return new ImageResponse(
     (
       <div
@@ -39,39 +43,13 @@ export default function OpenGraphImage() {
 
         {/* Top Header Tag */}
         <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              gap: "12px",
-            }}
-          >
-            <div
-              style={{
-                fontSize: "36px",
-                fontWeight: 900,
-                letterSpacing: "-0.04em",
-                color: "#F5F4EB",
-                textTransform: "uppercase",
-              }}
-            >
-              GAMEDAY
-            </div>
-            <div
-              style={{
-                backgroundColor: "rgba(200, 154, 43, 0.2)",
-                border: "1px solid #C89A2B",
-                color: "#C89A2B",
-                fontSize: "13px",
-                fontWeight: 800,
-                letterSpacing: "0.2em",
-                padding: "4px 12px",
-                textTransform: "uppercase",
-              }}
-            >
-              SEASON 2026
-            </div>
-          </div>
+          {/* eslint-disable-next-line @next/next/no-img-element, jsx-a11y/alt-text */}
+          <img
+            // Satori accepts an ArrayBuffer as the image source.
+            src={logo as unknown as string}
+            width={417}
+            height={44}
+          />
 
           <div
             style={{
